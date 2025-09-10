@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import HeroSection from "@/components/HeroSection";
+import RecommendationForm from "@/components/RecommendationForm";
+import CropRecommendations from "@/components/CropRecommendations";
 
 const Index = () => {
+  const [recommendations, setRecommendations] = useState(null);
+  const [formData, setFormData] = useState(null);
+
+  const handleFormSubmit = (data: any) => {
+    setFormData(data);
+    // Simulate AI processing delay
+    setTimeout(() => {
+      setRecommendations(true);
+      // Scroll to results
+      document.getElementById('results')?.scrollIntoView({ behavior: 'smooth' });
+    }, 1500);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      <HeroSection />
+      
+      <RecommendationForm onSubmit={handleFormSubmit} />
+      
+      {recommendations && formData && (
+        <div id="results">
+          <CropRecommendations farmData={formData} />
+        </div>
+      )}
     </div>
   );
 };

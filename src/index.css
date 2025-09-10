@@ -2,41 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Agricultural AI Design System - Earth tones and nature-inspired colors */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors inspired by agriculture */
+    --background: 48 20% 97%;
+    --foreground: 140 20% 15%;
 
+    /* Card colors with subtle earth tones */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 140 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 140 20% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary green - forest/crop inspired */
+    --primary: 140 65% 28%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 140 45% 45%;
+    --primary-glow: 140 55% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary earth brown */
+    --secondary: 35 25% 85%;
+    --secondary-foreground: 35 35% 25%;
+    --secondary-dark: 35 35% 25%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted colors with warm undertones */
+    --muted: 35 15% 92%;
+    --muted-foreground: 140 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent golden wheat color */
+    --accent: 45 85% 75%;
+    --accent-foreground: 35 35% 25%;
+    --accent-gold: 45 85% 65%;
+
+    /* Sky blue for weather elements */
+    --sky: 200 75% 55%;
+    --sky-light: 200 65% 75%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 140 25% 88%;
+    --input: 140 15% 92%;
+    --ring: 140 65% 28%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Agricultural gradients */
+    --gradient-field: linear-gradient(135deg, hsl(var(--primary-light)), hsl(var(--primary)));
+    --gradient-earth: linear-gradient(180deg, hsl(var(--accent)), hsl(var(--secondary)));
+    --gradient-sky: linear-gradient(180deg, hsl(var(--sky-light)), hsl(var(--sky)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-glow)) 50%, hsl(var(--accent-gold)) 100%);
+
+    /* Elegant shadows */
+    --shadow-soft: 0 4px 20px -2px hsl(var(--primary) / 0.1);
+    --shadow-card: 0 8px 30px -8px hsl(var(--primary) / 0.15);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.3);
+
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,41 +85,43 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode with deep agricultural tones */
+    --background: 140 25% 8%;
+    --foreground: 140 15% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 140 20% 12%;
+    --card-foreground: 140 15% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 140 20% 12%;
+    --popover-foreground: 140 15% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 140 45% 45%;
+    --primary-foreground: 140 25% 8%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 35 20% 18%;
+    --secondary-foreground: 35 15% 85%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 35 15% 15%;
+    --muted-foreground: 140 12% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 75% 55%;
+    --accent-foreground: 35 25% 15%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 140 15% 20%;
+    --input: 140 15% 18%;
+    --ring: 140 45% 45%;
+
+    --sidebar-background: 140 20% 10%;
+    --sidebar-foreground: 140 15% 85%;
+    --sidebar-primary: 140 45% 45%;
+    --sidebar-primary-foreground: 140 25% 8%;
+    --sidebar-accent: 140 15% 15%;
+    --sidebar-accent-foreground: 140 15% 85%;
+    --sidebar-border: 140 15% 15%;
+    --sidebar-ring: 140 45% 45%;
   }
 }
 
@@ -100,6 +131,64 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--accent-gold) / 0.03) 0%, transparent 50%);
+  }
+
+  /* Custom animations */
+  @keyframes gentle-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-float {
+    animation: gentle-float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-field {
+    background: var(--gradient-field);
+  }
+
+  .bg-gradient-earth {
+    background: var(--gradient-earth);
+  }
+
+  .bg-gradient-sky {
+    background: var(--gradient-sky);
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  /* Custom shadows */
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
   }
 }
