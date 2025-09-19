@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Thermometer, CloudRain, DollarSign } from "lucide-react";
+import { MapPin, Thermometer, CloudRain, DollarSign, Globe } from "lucide-react";
 import { toast } from "sonner";
 
 interface FormData {
@@ -16,6 +16,7 @@ interface FormData {
   budget: string;
   previousCrop: string;
   notes: string;
+  language: string;
 }
 
 interface RecommendationFormProps {
@@ -30,7 +31,8 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
     climate: "",
     budget: "",
     previousCrop: "",
-    notes: ""
+    notes: "",
+    language: "english"
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -71,13 +73,31 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                   <MapPin className="w-4 h-4 text-primary" />
                   Location *
                 </Label>
-                <Input
-                  id="location"
-                  placeholder="e.g., Punjab, India"
-                  value={formData.location}
-                  onChange={(e) => handleInputChange("location", e.target.value)}
-                  className="h-12"
-                />
+                <Select onValueChange={(value) => handleInputChange("location", value)}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Select your state/region" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="punjab">Punjab</SelectItem>
+                    <SelectItem value="haryana">Haryana</SelectItem>
+                    <SelectItem value="uttar-pradesh">Uttar Pradesh</SelectItem>
+                    <SelectItem value="madhya-pradesh">Madhya Pradesh</SelectItem>
+                    <SelectItem value="rajasthan">Rajasthan</SelectItem>
+                    <SelectItem value="maharashtra">Maharashtra</SelectItem>
+                    <SelectItem value="gujarat">Gujarat</SelectItem>
+                    <SelectItem value="andhra-pradesh">Andhra Pradesh</SelectItem>
+                    <SelectItem value="telangana">Telangana</SelectItem>
+                    <SelectItem value="karnataka">Karnataka</SelectItem>
+                    <SelectItem value="tamil-nadu">Tamil Nadu</SelectItem>
+                    <SelectItem value="kerala">Kerala</SelectItem>
+                    <SelectItem value="west-bengal">West Bengal</SelectItem>
+                    <SelectItem value="bihar">Bihar</SelectItem>
+                    <SelectItem value="odisha">Odisha</SelectItem>
+                    <SelectItem value="assam">Assam</SelectItem>
+                    <SelectItem value="jharkhand">Jharkhand</SelectItem>
+                    <SelectItem value="chhattisgarh">Chhattisgarh</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="space-y-2">
@@ -87,8 +107,9 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                 </Label>
                 <Input
                   id="farmSize"
-                  placeholder="e.g., 10"
+                  placeholder="e.g., 2.5 (bigha to acres converter available)"
                   type="number"
+                  step="0.1"
                   value={formData.farmSize}
                   onChange={(e) => handleInputChange("farmSize", e.target.value)}
                   className="h-12"
@@ -105,12 +126,12 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                     <SelectValue placeholder="Select soil type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="clay">Clay Soil</SelectItem>
-                    <SelectItem value="sandy">Sandy Soil</SelectItem>
-                    <SelectItem value="loam">Loam Soil</SelectItem>
-                    <SelectItem value="silt">Silt Soil</SelectItem>
-                    <SelectItem value="peat">Peat Soil</SelectItem>
-                    <SelectItem value="chalk">Chalk Soil</SelectItem>
+                    <SelectItem value="alluvial">Alluvial Soil (गंगा-यमुना दोआब)</SelectItem>
+                    <SelectItem value="black-cotton">Black Cotton Soil (काली मिट्टी)</SelectItem>
+                    <SelectItem value="red-laterite">Red & Laterite Soil (लाल मिट्टी)</SelectItem>
+                    <SelectItem value="desert">Desert Soil (रेगिस्तानी मिट्टी)</SelectItem>
+                    <SelectItem value="mountain">Mountain Soil (पहाड़ी मिट्टी)</SelectItem>
+                    <SelectItem value="saline-alkaline">Saline-Alkaline Soil (खारी मिट्टी)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -125,12 +146,12 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                     <SelectValue placeholder="Select climate" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="tropical">Tropical</SelectItem>
-                    <SelectItem value="subtropical">Subtropical</SelectItem>
-                    <SelectItem value="temperate">Temperate</SelectItem>
-                    <SelectItem value="arid">Arid</SelectItem>
-                    <SelectItem value="semi-arid">Semi-Arid</SelectItem>
-                    <SelectItem value="mediterranean">Mediterranean</SelectItem>
+                    <SelectItem value="tropical">Tropical (उष्णकटिबंधीय)</SelectItem>
+                    <SelectItem value="subtropical">Subtropical (उपोष्णकटिबंधीय)</SelectItem>
+                    <SelectItem value="temperate">Temperate (समशीतोष्ण)</SelectItem>
+                    <SelectItem value="arid">Arid (शुष्क)</SelectItem>
+                    <SelectItem value="semi-arid">Semi-Arid (अर्ध-शुष्क)</SelectItem>
+                    <SelectItem value="humid">Humid (आर्द्र)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -145,10 +166,10 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                     <SelectValue placeholder="Select budget range" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="low">Under $5,000</SelectItem>
-                    <SelectItem value="medium">$5,000 - $20,000</SelectItem>
-                    <SelectItem value="high">$20,000 - $50,000</SelectItem>
-                    <SelectItem value="premium">Above $50,000</SelectItem>
+                    <SelectItem value="low">Under ₹4,00,000</SelectItem>
+                    <SelectItem value="medium">₹4,00,000 - ₹15,00,000</SelectItem>
+                    <SelectItem value="high">₹15,00,000 - ₹40,00,000</SelectItem>
+                    <SelectItem value="premium">Above ₹40,00,000</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -159,7 +180,7 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                 </Label>
                 <Input
                   id="previousCrop"
-                  placeholder="e.g., Wheat, Rice, Corn"
+                  placeholder="e.g., गेहूं (Wheat), धान (Rice), मक्का (Corn)"
                   value={formData.previousCrop}
                   onChange={(e) => handleInputChange("previousCrop", e.target.value)}
                   className="h-12"
@@ -167,18 +188,42 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
               </div>
             </div>
 
-            {/* Additional Notes */}
-            <div className="space-y-2">
-              <Label htmlFor="notes" className="text-base font-medium">
-                Additional Notes
-              </Label>
-              <Textarea
-                id="notes"
-                placeholder="Any specific requirements, challenges, or goals for your farm..."
-                value={formData.notes}
-                onChange={(e) => handleInputChange("notes", e.target.value)}
-                className="min-h-[100px] resize-none"
-              />
+            {/* Language & Additional Notes */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label className="text-base font-medium flex items-center gap-2">
+                  <Globe className="w-4 h-4 text-primary" />
+                  Preferred Language
+                </Label>
+                <Select onValueChange={(value) => handleInputChange("language", value)}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Select language" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="english">English</SelectItem>
+                    <SelectItem value="hindi">हिंदी (Hindi)</SelectItem>
+                    <SelectItem value="gujarati">ગુજરાતી (Gujarati)</SelectItem>
+                    <SelectItem value="punjabi">ਪੰਜਾਬੀ (Punjabi)</SelectItem>
+                    <SelectItem value="marathi">मराठी (Marathi)</SelectItem>
+                    <SelectItem value="bengali">বাংলা (Bengali)</SelectItem>
+                    <SelectItem value="tamil">தமிழ் (Tamil)</SelectItem>
+                    <SelectItem value="telugu">తెలుగు (Telugu)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="notes" className="text-base font-medium">
+                  Additional Notes (अतिरिक्त जानकारी)
+                </Label>
+                <Textarea
+                  id="notes"
+                  placeholder="Any specific requirements, irrigation facilities, government schemes..."
+                  value={formData.notes}
+                  onChange={(e) => handleInputChange("notes", e.target.value)}
+                  className="min-h-[100px] resize-none"
+                />
+              </div>
             </div>
 
             {/* Submit Button */}

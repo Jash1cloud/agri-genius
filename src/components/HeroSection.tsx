@@ -22,7 +22,7 @@ const HeroSection = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-card/80 backdrop-blur-sm rounded-full px-4 py-2 border shadow-soft">
               <Brain className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">AI-Powered Agriculture</span>
+              <span className="text-sm font-medium">AI-Powered Agriculture for India</span>
             </div>
 
             {/* Main Heading */}
@@ -35,7 +35,7 @@ const HeroSection = () => {
                 <span className="text-foreground">Recommendations</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Harness the power of AI to get personalized crop recommendations based on your soil, climate, and market conditions. Maximize your yield and profits.
+                Harness the power of AI to get personalized crop recommendations for Indian farmers. Maximize your yield and profits with region-specific insights based on soil, climate, and market conditions.
               </p>
             </div>
 
@@ -47,11 +47,11 @@ const HeroSection = () => {
                 className="group"
                 onClick={() => document.getElementById('recommendation-form')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Get Crop Recommendations
+                Get Crop Recommendations (फसल सुझाव पाएं)
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="outline" size="lg">
-                Learn More
+                Learn More (और जानें)
               </Button>
             </div>
 
@@ -59,11 +59,11 @@ const HeroSection = () => {
             <div className="flex flex-wrap gap-3 pt-4">
               <div className="flex items-center gap-2 bg-card/60 backdrop-blur-sm rounded-full px-4 py-2 border">
                 <Leaf className="w-4 h-4 text-primary" />
-                <span className="text-sm">Sustainable Farming</span>
+                <span className="text-sm">Sustainable Farming (टिकाऊ खेती)</span>
               </div>
               <div className="flex items-center gap-2 bg-card/60 backdrop-blur-sm rounded-full px-4 py-2 border">
                 <TrendingUp className="w-4 h-4 text-primary" />
-                <span className="text-sm">Profit Optimization</span>
+                <span className="text-sm">Profit Optimization (लाभ अनुकूलन)</span>
               </div>
             </div>
           </div>
@@ -80,8 +80,8 @@ const HeroSection = () => {
                 <div className="text-sm text-muted-foreground">Avg. Yield Increase</div>
               </div>
               <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border shadow-card -mt-4">
-                <div className="text-3xl font-bold text-sky">10K+</div>
-                <div className="text-sm text-muted-foreground">Farmers Helped</div>
+                <div className="text-3xl font-bold text-sky">50L+</div>
+                <div className="text-sm text-muted-foreground">Indian Farmers</div>
               </div>
               <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border shadow-card mt-4">
                 <div className="text-3xl font-bold text-primary">24/7</div>

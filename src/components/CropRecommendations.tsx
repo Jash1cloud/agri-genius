@@ -44,122 +44,121 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["tropical", "subtropical"],
         soils: ["clay", "loam"],
         regions: ["asia", "india", "bangladesh", "vietnam", "thailand", "philippines"],
-        confidence: 92,
+        confidence: 95,
         expectedYield: "4-6 tons/acre",
         growthPeriod: "3-6 months",
-        investmentRequired: budget === "low" ? "$400-600/acre" : "$600-900/acre",
+        investmentRequired: budget === "low" ? "₹32,000-48,000/acre" : "₹48,000-72,000/acre",
         profitability: "high" as const,
         waterRequirement: "high" as const,
-        marketPrice: "$450-550/ton"
+        marketPrice: "₹20,000-25,000/quintal (MSP: ₹21,830)"
       },
       sugarcane: {
         name: "Sugarcane",
         climates: ["tropical", "subtropical"],
         soils: ["loam", "clay"],
         regions: ["brazil", "india", "thailand", "australia", "philippines"],
-        confidence: 89,
+        confidence: 88,
         expectedYield: "50-80 tons/acre",
         growthPeriod: "12-18 months",
-        investmentRequired: budget === "low" ? "$800-1200/acre" : "$1200-2000/acre",
+        investmentRequired: budget === "low" ? "₹64,000-96,000/acre" : "₹96,000-1,60,000/acre",
         profitability: "high" as const,
         waterRequirement: "high" as const,
-        marketPrice: "$35-45/ton"
+        marketPrice: "₹2,800-3,600/ton"
       },
-      // Temperate crops
+      // Rabi crops (Winter season)
       wheat: {
-        name: "Wheat",
-        climates: ["temperate", "semi-arid", "mediterranean"],
-        soils: ["loam", "clay", "silt"],
-        regions: ["usa", "canada", "australia", "russia", "ukraine", "europe"],
+        name: "Wheat (गेहूं)",
+        climates: ["temperate", "semi-arid", "subtropical"],
+        soils: ["alluvial", "black-cotton", "red-laterite"],
+        regions: ["punjab", "haryana", "uttar-pradesh", "madhya-pradesh", "rajasthan"],
         confidence: 94,
         expectedYield: "3.5-5 tons/acre",
-        growthPeriod: "4-8 months",
-        investmentRequired: budget === "low" ? "$300-500/acre" : "$500-800/acre",
+        growthPeriod: "4-6 months (Nov-Apr)",
+        investmentRequired: budget === "low" ? "₹24,000-40,000/acre" : "₹40,000-64,000/acre",
         profitability: "medium" as const,
         waterRequirement: "medium" as const,
-        marketPrice: "$250-350/ton"
+        marketPrice: "₹20,000-28,000/quintal (MSP: ₹22,750)"
       },
-      corn: {
-        name: "Corn",
-        climates: ["temperate", "subtropical"],
-        soils: ["loam", "silt", "clay"],
-        regions: ["usa", "brazil", "argentina", "ukraine", "china"],
+      maize: {
+        name: "Maize (मक्का)",
+        climates: ["subtropical", "temperate"],
+        soils: ["alluvial", "black-cotton", "red-laterite"],
+        regions: ["karnataka", "andhra-pradesh", "telangana", "maharashtra", "bihar"],
         confidence: 91,
         expectedYield: "6-12 tons/acre",
-        growthPeriod: "3-5 months",
-        investmentRequired: budget === "low" ? "$400-700/acre" : "$700-1200/acre",
+        growthPeriod: "3-4 months (Kharif)",
+        investmentRequired: budget === "low" ? "₹32,000-56,000/acre" : "₹56,000-96,000/acre",
         profitability: "high" as const,
         waterRequirement: "medium" as const,
-        marketPrice: "$200-280/ton"
+        marketPrice: "₹16,000-22,400/quintal (MSP: ₹19,750)"
       },
-      // Arid/Semi-arid crops
+      // Cash crops
       cotton: {
-        name: "Cotton",
-        climates: ["arid", "semi-arid", "subtropical"],
-        soils: ["sandy", "loam"],
-        regions: ["india", "usa", "china", "brazil", "pakistan"],
-        confidence: 87,
-        expectedYield: "800-1200 lbs/acre",
-        growthPeriod: "5-8 months",
-        investmentRequired: budget === "low" ? "$600-900/acre" : "$900-1500/acre",
+        name: "Cotton (कपास)",
+        climates: ["semi-arid", "subtropical"],
+        soils: ["black-cotton", "alluvial"],
+        regions: ["gujarat", "maharashtra", "telangana", "andhra-pradesh", "haryana"],
+        confidence: 90,
+        expectedYield: "15-25 quintals/acre",
+        growthPeriod: "5-6 months (Kharif)",
+        investmentRequired: budget === "low" ? "₹48,000-72,000/acre" : "₹72,000-1,20,000/acre",
         profitability: "high" as const,
         waterRequirement: "medium" as const,
-        marketPrice: "$0.65-0.85/lb"
+        marketPrice: "₹5,500-7,000/quintal (MSP: ₹6,280)"
       },
-      millet: {
-        name: "Pearl Millet",
+      bajra: {
+        name: "Pearl Millet (बाजरा)",
         climates: ["arid", "semi-arid"],
-        soils: ["sandy", "loam"],
-        regions: ["africa", "india", "australia"],
-        confidence: 85,
-        expectedYield: "1.5-3 tons/acre",
-        growthPeriod: "2-4 months",
-        investmentRequired: budget === "low" ? "$200-400/acre" : "$400-600/acre",
-        profitability: "medium" as const,
-        waterRequirement: "low" as const,
-        marketPrice: "$300-400/ton"
-      },
-      // Mediterranean crops
-      olives: {
-        name: "Olives",
-        climates: ["mediterranean", "subtropical"],
-        soils: ["sandy", "loam", "chalk"],
-        regions: ["mediterranean", "spain", "italy", "greece", "california"],
+        soils: ["desert", "red-laterite", "alluvial"],
+        regions: ["rajasthan", "gujarat", "haryana", "maharashtra"],
         confidence: 88,
-        expectedYield: "2-4 tons/acre",
-        growthPeriod: "6-8 months (annual harvest)",
-        investmentRequired: budget === "low" ? "$1000-2000/acre" : "$2000-4000/acre",
+        expectedYield: "1.5-3 tons/acre",
+        growthPeriod: "2-4 months (Kharif)",
+        investmentRequired: budget === "low" ? "₹16,000-32,000/acre" : "₹32,000-48,000/acre",
+        profitability: "medium" as const,
+        waterRequirement: "low" as const,
+        marketPrice: "₹24,000-32,000/quintal (MSP: ₹28,400)"
+      },
+      mustard: {
+        name: "Mustard (सरसों)",
+        climates: ["temperate", "semi-arid"],
+        soils: ["alluvial", "black-cotton"],
+        regions: ["rajasthan", "haryana", "madhya-pradesh", "uttar-pradesh"],
+        confidence: 85,
+        expectedYield: "1-2 tons/acre",
+        growthPeriod: "3-4 months (Rabi)",
+        investmentRequired: budget === "low" ? "₹20,000-35,000/acre" : "₹35,000-55,000/acre",
+        profitability: "medium" as const,
+        waterRequirement: "low" as const,
+        marketPrice: "₹50,000-65,000/quintal (MSP: ₹54,200)"
+      },
+      // Pulses
+      chickpea: {
+        name: "Chickpea (चना)",
+        climates: ["semi-arid", "temperate"],
+        soils: ["black-cotton", "alluvial", "red-laterite"],
+        regions: ["madhya-pradesh", "rajasthan", "maharashtra", "andhra-pradesh"],
+        confidence: 87,
+        expectedYield: "1.5-2.5 tons/acre",
+        growthPeriod: "4-5 months (Rabi)",
+        investmentRequired: budget === "low" ? "₹25,000-40,000/acre" : "₹40,000-65,000/acre",
         profitability: "high" as const,
         waterRequirement: "low" as const,
-        marketPrice: "$2000-4000/ton"
+        marketPrice: "₹50,000-65,000/quintal (MSP: ₹56,00)"
       },
-      // Universal crops
-      soybeans: {
-        name: "Soybeans",
-        climates: ["temperate", "subtropical", "tropical"],
-        soils: ["loam", "silt", "clay"],
-        regions: ["usa", "brazil", "argentina", "china"],
-        confidence: 83,
+      soybean: {
+        name: "Soybean (सोयाबीन)",
+        climates: ["subtropical", "temperate"],
+        soils: ["black-cotton", "alluvial"],
+        regions: ["madhya-pradesh", "maharashtra", "rajasthan", "chhattisgarh"],
+        confidence: 85,
         expectedYield: "2.5-4 tons/acre",
-        growthPeriod: "3-5 months",
-        investmentRequired: budget === "low" ? "$300-500/acre" : "$500-800/acre",
-        profitability: "medium" as const,
-        waterRequirement: "medium" as const,
-        marketPrice: "$400-500/ton"
-      },
-      potatoes: {
-        name: "Potatoes",
-        climates: ["temperate", "subtropical"],
-        soils: ["sandy", "loam"],
-        regions: ["worldwide"],
-        confidence: 86,
-        expectedYield: "15-25 tons/acre",
-        growthPeriod: "3-4 months",
-        investmentRequired: budget === "low" ? "$800-1200/acre" : "$1200-2000/acre",
+        growthPeriod: "3-4 months (Kharif)",
+        investmentRequired: budget === "low" ? "₹30,000-45,000/acre" : "₹45,000-70,000/acre",
         profitability: "high" as const,
         waterRequirement: "medium" as const,
-        marketPrice: "$200-400/ton"
-      }
+        marketPrice: "₹38,000-48,000/quintal (MSP: ₹42,250)"
+      },
     };
 
     // Match crops based on conditions
@@ -190,7 +189,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
       
       // Regional match (20% weight)
       const regionMatch = crop.regions.some(region => 
-        locationLower.includes(region) || region === "worldwide"
+        locationLower.includes(region) || region.replace('-', ' ').includes(locationLower.replace('-', ' '))
       );
       if (regionMatch) {
         score += 20;
@@ -271,11 +270,14 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
     if (crop.name === "Soybeans") {
       benefits.push("Nitrogen fixation benefits", "Excellent rotation crop");
     }
-    if (location.toLowerCase().includes("india") && crop.name === "Rice") {
-      benefits.push("Government MSP support", "Established supply chain");
+    if (location.toLowerCase().includes("punjab") && crop.name.includes("Rice")) {
+      benefits.push("Government MSP support", "Well-established supply chain", "Excellent procurement system");
     }
-    if (crop.name === "Cotton") {
-      benefits.push("Strong export market", "Value-added processing opportunities");
+    if (location.toLowerCase().includes("gujarat") && crop.name.includes("Cotton")) {
+      benefits.push("Strong cooperative network", "Value-added processing", "Export opportunities");
+    }
+    if (location.toLowerCase().includes("madhya-pradesh") && crop.name.includes("Soybean")) {
+      benefits.push("Soybean processing units nearby", "Government subsidies", "Crop insurance available");
     }
     
     // Default benefits
@@ -317,7 +319,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
             Your <span className="text-primary">AI-Generated</span> Crop Recommendations
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Based on your farm conditions in <strong>{farmData.location}</strong>, here are the most suitable crops for maximum profitability.
+            Based on your farm conditions in <strong>{farmData.location}</strong>, here are the most suitable crops for maximum profitability and sustainability.
           </p>
         </div>
 
