@@ -32,54 +32,256 @@ interface CropRecommendationsProps {
 }
 
 const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
-  // Simulated AI recommendations based on form data
+  // Generate location and condition-specific recommendations
   const getRecommendations = (): CropData[] => {
-    const { soilType, climate, budget } = farmData;
+    const { soilType, climate, budget, location, farmSize } = farmData;
     
-    // This would be replaced with actual AI API call
-    const recommendations: CropData[] = [
-      {
-        name: "Organic Wheat",
-        confidence: 95,
-        expectedYield: "3.5-4.2 tons/acre",
-        growthPeriod: "4-6 months",
-        investmentRequired: "$800-1,200/acre",
-        profitability: "high",
-        waterRequirement: "medium",
-        suitabilityReason: `Excellent match for ${soilType} soil and ${climate} climate. High market demand for organic varieties.`,
-        marketPrice: "$650-750/ton",
-        risks: ["Weather dependency", "Pest management"],
-        benefits: ["High market value", "Sustainable farming", "Government subsidies available"]
+    // Crop database with conditions and regional suitability
+    const cropDatabase = {
+      // Tropical/Subtropical crops
+      rice: {
+        name: "Rice",
+        climates: ["tropical", "subtropical"],
+        soils: ["clay", "loam"],
+        regions: ["asia", "india", "bangladesh", "vietnam", "thailand", "philippines"],
+        confidence: 92,
+        expectedYield: "4-6 tons/acre",
+        growthPeriod: "3-6 months",
+        investmentRequired: budget === "low" ? "$400-600/acre" : "$600-900/acre",
+        profitability: "high" as const,
+        waterRequirement: "high" as const,
+        marketPrice: "$450-550/ton"
       },
-      {
-        name: "Hybrid Corn",
+      sugarcane: {
+        name: "Sugarcane",
+        climates: ["tropical", "subtropical"],
+        soils: ["loam", "clay"],
+        regions: ["brazil", "india", "thailand", "australia", "philippines"],
+        confidence: 89,
+        expectedYield: "50-80 tons/acre",
+        growthPeriod: "12-18 months",
+        investmentRequired: budget === "low" ? "$800-1200/acre" : "$1200-2000/acre",
+        profitability: "high" as const,
+        waterRequirement: "high" as const,
+        marketPrice: "$35-45/ton"
+      },
+      // Temperate crops
+      wheat: {
+        name: "Wheat",
+        climates: ["temperate", "semi-arid", "mediterranean"],
+        soils: ["loam", "clay", "silt"],
+        regions: ["usa", "canada", "australia", "russia", "ukraine", "europe"],
+        confidence: 94,
+        expectedYield: "3.5-5 tons/acre",
+        growthPeriod: "4-8 months",
+        investmentRequired: budget === "low" ? "$300-500/acre" : "$500-800/acre",
+        profitability: "medium" as const,
+        waterRequirement: "medium" as const,
+        marketPrice: "$250-350/ton"
+      },
+      corn: {
+        name: "Corn",
+        climates: ["temperate", "subtropical"],
+        soils: ["loam", "silt", "clay"],
+        regions: ["usa", "brazil", "argentina", "ukraine", "china"],
+        confidence: 91,
+        expectedYield: "6-12 tons/acre",
+        growthPeriod: "3-5 months",
+        investmentRequired: budget === "low" ? "$400-700/acre" : "$700-1200/acre",
+        profitability: "high" as const,
+        waterRequirement: "medium" as const,
+        marketPrice: "$200-280/ton"
+      },
+      // Arid/Semi-arid crops
+      cotton: {
+        name: "Cotton",
+        climates: ["arid", "semi-arid", "subtropical"],
+        soils: ["sandy", "loam"],
+        regions: ["india", "usa", "china", "brazil", "pakistan"],
+        confidence: 87,
+        expectedYield: "800-1200 lbs/acre",
+        growthPeriod: "5-8 months",
+        investmentRequired: budget === "low" ? "$600-900/acre" : "$900-1500/acre",
+        profitability: "high" as const,
+        waterRequirement: "medium" as const,
+        marketPrice: "$0.65-0.85/lb"
+      },
+      millet: {
+        name: "Pearl Millet",
+        climates: ["arid", "semi-arid"],
+        soils: ["sandy", "loam"],
+        regions: ["africa", "india", "australia"],
+        confidence: 85,
+        expectedYield: "1.5-3 tons/acre",
+        growthPeriod: "2-4 months",
+        investmentRequired: budget === "low" ? "$200-400/acre" : "$400-600/acre",
+        profitability: "medium" as const,
+        waterRequirement: "low" as const,
+        marketPrice: "$300-400/ton"
+      },
+      // Mediterranean crops
+      olives: {
+        name: "Olives",
+        climates: ["mediterranean", "subtropical"],
+        soils: ["sandy", "loam", "chalk"],
+        regions: ["mediterranean", "spain", "italy", "greece", "california"],
         confidence: 88,
-        expectedYield: "8-10 tons/acre",
-        growthPeriod: "3-4 months",
-        investmentRequired: "$600-900/acre",
-        profitability: "high",
-        waterRequirement: "medium",
-        suitabilityReason: `Well-suited for your farm size and climate conditions. Proven high yields in similar regions.`,
-        marketPrice: "$280-320/ton",
-        risks: ["Market price fluctuation"],
-        benefits: ["High yield potential", "Reliable market", "Multiple harvest seasons"]
+        expectedYield: "2-4 tons/acre",
+        growthPeriod: "6-8 months (annual harvest)",
+        investmentRequired: budget === "low" ? "$1000-2000/acre" : "$2000-4000/acre",
+        profitability: "high" as const,
+        waterRequirement: "low" as const,
+        marketPrice: "$2000-4000/ton"
       },
-      {
+      // Universal crops
+      soybeans: {
         name: "Soybeans",
-        confidence: 82,
-        expectedYield: "2.8-3.2 tons/acre",
-        growthPeriod: "4-5 months",
-        investmentRequired: "$450-650/acre",
-        profitability: "medium",
-        waterRequirement: "low",
-        suitabilityReason: `Good nitrogen-fixing crop for soil health improvement. Moderate water requirements suit your region.`,
-        marketPrice: "$520-580/ton",
-        risks: ["Lower profit margins"],
-        benefits: ["Soil improvement", "Low water needs", "Rotation crop benefits"]
+        climates: ["temperate", "subtropical", "tropical"],
+        soils: ["loam", "silt", "clay"],
+        regions: ["usa", "brazil", "argentina", "china"],
+        confidence: 83,
+        expectedYield: "2.5-4 tons/acre",
+        growthPeriod: "3-5 months",
+        investmentRequired: budget === "low" ? "$300-500/acre" : "$500-800/acre",
+        profitability: "medium" as const,
+        waterRequirement: "medium" as const,
+        marketPrice: "$400-500/ton"
+      },
+      potatoes: {
+        name: "Potatoes",
+        climates: ["temperate", "subtropical"],
+        soils: ["sandy", "loam"],
+        regions: ["worldwide"],
+        confidence: 86,
+        expectedYield: "15-25 tons/acre",
+        growthPeriod: "3-4 months",
+        investmentRequired: budget === "low" ? "$800-1200/acre" : "$1200-2000/acre",
+        profitability: "high" as const,
+        waterRequirement: "medium" as const,
+        marketPrice: "$200-400/ton"
       }
-    ];
+    };
 
-    return recommendations;
+    // Match crops based on conditions
+    const suitableCrops: CropData[] = [];
+    const locationLower = location.toLowerCase();
+    
+    Object.values(cropDatabase).forEach(crop => {
+      let score = 0;
+      let reasons: string[] = [];
+      
+      // Climate match (40% weight)
+      if (crop.climates.includes(climate)) {
+        score += 40;
+        reasons.push(`optimal ${climate} climate conditions`);
+      } else {
+        score += 10; // Partial compatibility
+        reasons.push(`adaptable to ${climate} climate with proper management`);
+      }
+      
+      // Soil match (30% weight)
+      if (crop.soils.includes(soilType)) {
+        score += 30;
+        reasons.push(`excellent ${soilType} soil compatibility`);
+      } else {
+        score += 5;
+        reasons.push(`moderate ${soilType} soil adaptation possible`);
+      }
+      
+      // Regional match (20% weight)
+      const regionMatch = crop.regions.some(region => 
+        locationLower.includes(region) || region === "worldwide"
+      );
+      if (regionMatch) {
+        score += 20;
+        reasons.push(`proven success in your region`);
+      } else {
+        score += 5;
+        reasons.push(`emerging crop for your area`);
+      }
+      
+      // Budget compatibility (10% weight)
+      const budgetValue = budget === "low" ? 1 : budget === "medium" ? 2 : budget === "high" ? 3 : 4;
+      const investmentLevel = crop.investmentRequired.includes("$2000") ? 4 : 
+                             crop.investmentRequired.includes("$1000") ? 3 :
+                             crop.investmentRequired.includes("$600") ? 2 : 1;
+      
+      if (budgetValue >= investmentLevel) {
+        score += 10;
+        reasons.push(`fits within your budget range`);
+      }
+
+      if (score >= 50) { // Minimum threshold
+        const risks = generateRisks(crop, climate, soilType);
+        const benefits = generateBenefits(crop, climate, soilType, location);
+        
+        suitableCrops.push({
+          name: crop.name,
+          confidence: Math.min(95, Math.max(60, score + Math.random() * 10)),
+          expectedYield: crop.expectedYield,
+          growthPeriod: crop.growthPeriod,
+          investmentRequired: crop.investmentRequired,
+          profitability: crop.profitability,
+          waterRequirement: crop.waterRequirement,
+          suitabilityReason: `Perfect match for ${soilType} soil in ${climate} climate zones. ${reasons.join(', ')}.`,
+          marketPrice: crop.marketPrice,
+          risks,
+          benefits
+        });
+      }
+    });
+
+    // Sort by confidence and return top 3
+    return suitableCrops
+      .sort((a, b) => b.confidence - a.confidence)
+      .slice(0, 3);
+  };
+
+  const generateRisks = (crop: any, climate: string, soilType: string): string[] => {
+    const risks = [];
+    
+    if (crop.waterRequirement === "high" && (climate === "arid" || climate === "semi-arid")) {
+      risks.push("High water requirements in dry climate");
+    }
+    if (crop.name === "Rice" && soilType !== "clay") {
+      risks.push("Requires proper water management");
+    }
+    if (climate === "tropical") {
+      risks.push("Pest and disease pressure");
+    }
+    if (crop.profitability === "high") {
+      risks.push("Market price volatility");
+    }
+    
+    // Default risks
+    risks.push("Weather dependency", "Input cost fluctuations");
+    
+    return risks.slice(0, 3);
+  };
+
+  const generateBenefits = (crop: any, climate: string, soilType: string, location: string): string[] => {
+    const benefits = [];
+    
+    if (crop.profitability === "high") {
+      benefits.push("High profit potential");
+    }
+    if (crop.waterRequirement === "low") {
+      benefits.push("Water efficient cultivation");
+    }
+    if (crop.name === "Soybeans") {
+      benefits.push("Nitrogen fixation benefits", "Excellent rotation crop");
+    }
+    if (location.toLowerCase().includes("india") && crop.name === "Rice") {
+      benefits.push("Government MSP support", "Established supply chain");
+    }
+    if (crop.name === "Cotton") {
+      benefits.push("Strong export market", "Value-added processing opportunities");
+    }
+    
+    // Default benefits
+    benefits.push("Suitable for local conditions", "Market availability");
+    
+    return benefits.slice(0, 3);
   };
 
   const recommendations = getRecommendations();
