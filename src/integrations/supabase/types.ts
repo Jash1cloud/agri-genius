@@ -14,7 +14,146 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      borrowing_transactions: {
+        Row: {
+          borrower_id: string
+          borrower_notes: string | null
+          created_at: string
+          end_date: string
+          equipment_id: string
+          id: string
+          owner_id: string
+          owner_notes: string | null
+          start_date: string
+          status: string
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          borrower_id: string
+          borrower_notes?: string | null
+          created_at?: string
+          end_date: string
+          equipment_id: string
+          id?: string
+          owner_id: string
+          owner_notes?: string | null
+          start_date: string
+          status?: string
+          total_amount: number
+          updated_at?: string
+        }
+        Update: {
+          borrower_id?: string
+          borrower_notes?: string | null
+          created_at?: string
+          end_date?: string
+          equipment_id?: string
+          id?: string
+          owner_id?: string
+          owner_notes?: string | null
+          start_date?: string
+          status?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "borrowing_transactions_equipment_id_fkey"
+            columns: ["equipment_id"]
+            isOneToOne: false
+            referencedRelation: "equipment"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      equipment: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          id: string
+          images: string[] | null
+          is_available: boolean
+          location: string
+          name: string
+          owner_id: string
+          rental_price_per_day: number
+          specifications: Json | null
+          state: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          is_available?: boolean
+          location: string
+          name: string
+          owner_id: string
+          rental_price_per_day: number
+          specifications?: Json | null
+          state: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          is_available?: boolean
+          location?: string
+          name?: string
+          owner_id?: string
+          rental_price_per_day?: number
+          specifications?: Json | null
+          state?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          farm_size: number | null
+          farm_type: string | null
+          full_name: string
+          id: string
+          location: string | null
+          phone: string | null
+          state: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          farm_size?: number | null
+          farm_type?: string | null
+          full_name: string
+          id?: string
+          location?: string | null
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          farm_size?: number | null
+          farm_type?: string | null
+          full_name?: string
+          id?: string
+          location?: string | null
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
