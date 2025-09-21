@@ -32,22 +32,31 @@ const AuthForm = ({ onSuccess }: AuthFormProps) => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: loginForm.email,
         password: loginForm.password,
       });
 
       if (error) throw error;
 
-      toast({
-        title: "सफल! / Success!",
-        description: "आप सफलतापूर्वक लॉग इन हो गए हैं।",
-      });
-      onSuccess();
+      if (data.user) {
+        toast({
+          title: "सफल! / Success!",
+          description: "आप सफलतापूर्वक लॉग इन हो गए हैं।",
+        });
+        onSuccess();
+      }
     } catch (error: any) {
+      console.error("Login error:", error);
+      let errorMessage = error.message;
+      
+      if (error.message?.includes("Invalid login credentials")) {
+        errorMessage = "गलत ईमेल या पासवर्ड। कृपया जांच लें कि आपने सही विवरण दर्ज किया है या पहले खाता बनाया है।";
+      }
+      
       toast({
         title: "लॉगिन त्रुटि / Login Error",
-        description: error.message,
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
@@ -60,7 +69,7 @@ const AuthForm = ({ onSuccess }: AuthFormProps) => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: signupForm.email,
         password: signupForm.password,
         options: {
@@ -74,14 +83,27 @@ const AuthForm = ({ onSuccess }: AuthFormProps) => {
 
       if (error) throw error;
 
-      toast({
-        title: "खाता बनाया गया! / Account Created!",
-        description: "कृपया अपने ईमेल की जांच करें और साइन अप प्रक्रिया को पूरा करें।",
-      });
+      if (data.user) {
+        if (data.user.email_confirmed_at) {
+          // User is immediately confirmed, redirect
+          toast({
+            title: "सफल! / Success!",
+            description: "आपका खाता सफलतापूर्वक बनाया गया है।",
+          });
+          onSuccess();
+        } else {
+          // User needs to confirm email
+          toast({
+            title: "खाता बनाया गया! / Account Created!",
+            description: "कृपया अपने ईमेल की जांच करें और साइन अप प्रक्रिया को पूरा करने के लिए लिंक पर क्लिक करें।",
+          });
+        }
+      }
     } catch (error: any) {
+      console.error("Signup error:", error);
       toast({
         title: "साइनअप त्रुटि / Signup Error",
-        description: error.message,
+        description: error.message || "खाता बनाने में त्रुटि हुई। कृपया पुनः प्रयास करें।",
         variant: "destructive",
       });
     } finally {
