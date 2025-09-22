@@ -10,6 +10,8 @@ import AuthPage from "./pages/AuthPage";
 import EquipmentPage from "./pages/EquipmentPage";
 import AddEquipmentPage from "./pages/AddEquipmentPage";
 import ProfilePage from "./pages/ProfilePage";
+import FarmerDirectoryPage from "./pages/FarmerDirectoryPage";
+import EquipmentRequestsPage from "./pages/EquipmentRequestsPage";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +26,8 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/equipment" element={<EquipmentPage />} />
+            <Route path="/farmers" element={<FarmerDirectoryPage />} />
+            <Route path="/requests" element={<EquipmentRequestsPage />} />
             <Route path="/add-equipment" element={<AddEquipmentPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

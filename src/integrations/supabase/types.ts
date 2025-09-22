@@ -115,6 +115,54 @@ export type Database = {
         }
         Relationships: []
       }
+      equipment_requests: {
+        Row: {
+          budget_per_day: number | null
+          category: string
+          created_at: string
+          description: string | null
+          duration_days: number
+          farmer_id: string
+          id: string
+          is_fulfilled: boolean
+          location: string
+          required_date: string
+          state: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          budget_per_day?: number | null
+          category: string
+          created_at?: string
+          description?: string | null
+          duration_days?: number
+          farmer_id: string
+          id?: string
+          is_fulfilled?: boolean
+          location: string
+          required_date: string
+          state: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          budget_per_day?: number | null
+          category?: string
+          created_at?: string
+          description?: string | null
+          duration_days?: number
+          farmer_id?: string
+          id?: string
+          is_fulfilled?: boolean
+          location?: string
+          required_date?: string
+          state?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
