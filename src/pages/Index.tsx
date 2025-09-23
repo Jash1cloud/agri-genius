@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/HeroSection";
+import EquipmentQuickActions from "@/components/EquipmentQuickActions";
 import RecommendationForm from "@/components/RecommendationForm";
 import CropRecommendations from "@/components/CropRecommendations";
 import Navbar from "@/components/Navbar";
@@ -40,6 +41,8 @@ const Index = () => {
       )}
       
       <HeroSection />
+      
+      <EquipmentQuickActions />
       
       <RecommendationForm onSubmit={handleFormSubmit} />
       

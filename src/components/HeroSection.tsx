@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Leaf, TrendingUp } from "lucide-react";
+import { ArrowRight, Brain, Leaf, TrendingUp, Search, Plus, Users, Handshake } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-agriculture.jpg";
 
 const HeroSection = () => {
@@ -22,20 +23,20 @@ const HeroSection = () => {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-card/80 backdrop-blur-sm rounded-full px-4 py-2 border shadow-soft">
               <Brain className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">AI-Powered Agriculture for India</span>
+              <span className="text-sm font-medium">AI-Powered Agriculture & Equipment Sharing</span>
             </div>
 
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
                 <span className="bg-gradient-hero bg-clip-text text-transparent">
-                  Smart Crop
+                  Smart Farming
                 </span>
                 <br />
-                <span className="text-foreground">Recommendations</span>
+                <span className="text-foreground">Solutions</span>
               </h1>
               <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                Harness the power of AI to get personalized crop recommendations for Indian farmers. Maximize your yield and profits with region-specific insights based on soil, climate, and market conditions.
+                Get AI-powered crop recommendations AND share equipment with fellow farmers. Maximize your yield, reduce costs, and build a sustainable farming community.
               </p>
             </div>
 
@@ -50,9 +51,12 @@ const HeroSection = () => {
                 Get Crop Recommendations (फसल सुझाव पाएं)
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button variant="outline" size="lg">
-                Learn More (और जानें)
-              </Button>
+              <Link to="/equipment">
+                <Button variant="outline" size="lg" className="group w-full sm:w-auto">
+                  Browse Equipment (उपकरण देखें)
+                  <Search className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                </Button>
+              </Link>
             </div>
 
             {/* Feature Pills */}
@@ -62,8 +66,12 @@ const HeroSection = () => {
                 <span className="text-sm">Sustainable Farming (टिकाऊ खेती)</span>
               </div>
               <div className="flex items-center gap-2 bg-card/60 backdrop-blur-sm rounded-full px-4 py-2 border">
+                <Handshake className="w-4 h-4 text-primary" />
+                <span className="text-sm">Equipment Sharing (उपकरण साझाकरण)</span>
+              </div>
+              <div className="flex items-center gap-2 bg-card/60 backdrop-blur-sm rounded-full px-4 py-2 border">
                 <TrendingUp className="w-4 h-4 text-primary" />
-                <span className="text-sm">Profit Optimization (लाभ अनुकूलन)</span>
+                <span className="text-sm">Cost Reduction (लागत कम करें)</span>
               </div>
             </div>
           </div>
@@ -72,20 +80,20 @@ const HeroSection = () => {
           <div className="lg:block hidden">
             <div className="grid grid-cols-2 gap-6 animate-float">
               <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border shadow-card">
-                <div className="text-3xl font-bold text-primary">98%</div>
-                <div className="text-sm text-muted-foreground">Accuracy Rate</div>
+                <div className="text-3xl font-bold text-primary">500+</div>
+                <div className="text-sm text-muted-foreground">Equipment Available</div>
               </div>
               <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border shadow-card mt-8">
                 <div className="text-3xl font-bold text-accent-gold">45%</div>
-                <div className="text-sm text-muted-foreground">Avg. Yield Increase</div>
+                <div className="text-sm text-muted-foreground">Cost Savings</div>
               </div>
               <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border shadow-card -mt-4">
-                <div className="text-3xl font-bold text-sky">50L+</div>
-                <div className="text-sm text-muted-foreground">Indian Farmers</div>
+                <div className="text-3xl font-bold text-sky">5K+</div>
+                <div className="text-sm text-muted-foreground">Active Farmers</div>
               </div>
               <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border shadow-card mt-4">
                 <div className="text-3xl font-bold text-primary">24/7</div>
-                <div className="text-sm text-muted-foreground">AI Support</div>
+                <div className="text-sm text-muted-foreground">Support</div>
               </div>
             </div>
           </div>
