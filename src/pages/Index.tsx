@@ -32,10 +32,10 @@ const Index = () => {
       {user && <Navbar />}
       
       {!user && (
-        <div className="bg-primary/10 p-4 text-center">
-          <p className="mb-4">कृषि उपकरण किराए पर लेने या देने के लिए लॉगिन करें</p>
+        <div className="bg-muted/30 border-b p-4 text-center">
+          <p className="mb-4 text-sm text-muted-foreground">Please login to access equipment sharing features</p>
           <Link to="/auth">
-            <Button>लॉगिन / साइनअप करें / Login / Signup</Button>
+            <Button variant="outline" size="sm">Login / Signup</Button>
           </Link>
         </div>
       )}
@@ -44,10 +44,12 @@ const Index = () => {
       
       <EquipmentQuickActions />
       
-      <RecommendationForm onSubmit={handleFormSubmit} />
+      <div className="py-16">
+        <RecommendationForm onSubmit={handleFormSubmit} />
+      </div>
       
       {recommendations && formData && (
-        <div id="results">
+        <div id="results" className="py-16 bg-muted/20">
           <CropRecommendations farmData={formData} />
         </div>
       )}
