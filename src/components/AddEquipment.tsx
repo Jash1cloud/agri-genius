@@ -19,9 +19,9 @@ const INDIAN_STATES = [
 ];
 
 const EQUIPMENT_CATEGORIES = [
-  "ट्रैक्टर / Tractor", "हार्वेस्टर / Harvester", "प्लो / Plow", "कल्टीवेटर / Cultivator",
-  "सीड ड्रिल / Seed Drill", "स्प्रेयर / Sprayer", "थ्रेशर / Thresher", 
-  "इरिगेशन / Irrigation", "टिलेज / Tillage", "अन्य / Other"
+  "Tractor", "Harvester", "Plow", "Cultivator",
+  "Seed Drill", "Sprayer", "Thresher", 
+  "Irrigation", "Tillage", "Other"
 ];
 
 const AddEquipment = () => {
@@ -68,14 +68,14 @@ const AddEquipment = () => {
       if (error) throw error;
 
       toast({
-        title: "उपकरण जोड़ा गया! / Equipment Added!",
-        description: "आपका उपकरण सफलतापूर्वक सूची में जोड़ा गया है।",
+        title: "Equipment Added!",
+        description: "Your equipment has been successfully added to the listing.",
       });
 
       navigate("/equipment");
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -88,34 +88,34 @@ const AddEquipment = () => {
     <div className="container mx-auto px-4 py-8 max-w-2xl">
       <Card>
         <CardHeader>
-          <CardTitle>उपकरण जोड़ें / Add Equipment</CardTitle>
+          <CardTitle>Add Equipment</CardTitle>
           <CardDescription>
-            अपने कृषि उपकरण को किराए पर देने के लिए सूची में जोड़ें
+            List your agricultural equipment for rental
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">उपकरण का नाम / Equipment Name *</Label>
+                <Label htmlFor="name">Equipment Name *</Label>
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="जैसे: जॉन डियर ट्रैक्टर"
+                  placeholder="e.g., John Deere Tractor"
                   required
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="category">श्रेणी / Category *</Label>
+                <Label htmlFor="category">Category *</Label>
                 <Select
                   value={formData.category}
                   onValueChange={(value) => setFormData({ ...formData, category: value })}
                   required
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="श्रेणी चुनें" />
+                    <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
                     {EQUIPMENT_CATEGORIES.map((category) => (
@@ -129,19 +129,19 @@ const AddEquipment = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="description">विवरण / Description</Label>
+              <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="उपकरण के बारे में विस्तार से बताएं..."
+                placeholder="Describe your equipment in detail..."
                 rows={3}
               />
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="rentalPrice">किराया (₹/दिन) / Rental Price (₹/day) *</Label>
+                <Label htmlFor="rentalPrice">Rental Price (₹/day) *</Label>
                 <Input
                   id="rentalPrice"
                   type="number"
@@ -155,14 +155,14 @@ const AddEquipment = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="state">राज्य / State *</Label>
+                <Label htmlFor="state">State *</Label>
                 <Select
                   value={formData.state}
                   onValueChange={(value) => setFormData({ ...formData, state: value })}
                   required
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="राज्य चुनें" />
+                    <SelectValue placeholder="Select state" />
                   </SelectTrigger>
                   <SelectContent>
                     {INDIAN_STATES.map((state) => (
@@ -176,18 +176,18 @@ const AddEquipment = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="location">शहर/गाँव / City/Village *</Label>
+              <Label htmlFor="location">City/Village *</Label>
               <Input
                 id="location"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                placeholder="जैसे: अहमदाबाद, पुणे, जयपुर"
+                placeholder="e.g., Ahmedabad, Pune, Jaipur"
                 required
               />
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="specifications">तकनीकी विवरण / Technical Specifications (JSON)</Label>
+              <Label htmlFor="specifications">Technical Specifications (JSON)</Label>
               <Textarea
                 id="specifications"
                 value={formData.specifications}
@@ -196,12 +196,12 @@ const AddEquipment = () => {
                 rows={3}
               />
               <p className="text-xs text-muted-foreground">
-                JSON format में या सामान्य टेक्स्ट में विवरण दें
+                Provide details in JSON format or plain text
               </p>
             </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "जोड़ा जा रहा है..." : "उपकरण जोड़ें / Add Equipment"}
+              {isLoading ? "Adding..." : "Add Equipment"}
             </Button>
           </form>
         </CardContent>

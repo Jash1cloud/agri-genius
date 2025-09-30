@@ -49,12 +49,12 @@ const BorrowEquipmentDialog = ({ equipment, isOpen, onClose, onSubmit }: BorrowE
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>उधार अनुरोध / Borrow Request</DialogTitle>
+          <DialogTitle>Borrow Request</DialogTitle>
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label>उपकरण / Equipment</Label>
+            <Label>Equipment</Label>
             <div className="p-3 bg-muted rounded-lg">
               <div className="font-semibold">{equipment.name}</div>
               <div className="text-sm text-muted-foreground">
@@ -62,14 +62,14 @@ const BorrowEquipmentDialog = ({ equipment, isOpen, onClose, onSubmit }: BorrowE
               </div>
               <div className="flex items-center gap-1 text-sm font-medium">
                 <IndianRupee className="h-4 w-4" />
-                {equipment.rental_price_per_day}/दिन
+                {equipment.rental_price_per_day}/day
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="startDate">शुरू की तारीख / Start Date</Label>
+              <Label htmlFor="startDate">Start Date</Label>
               <Input
                 id="startDate"
                 type="date"
@@ -80,7 +80,7 @@ const BorrowEquipmentDialog = ({ equipment, isOpen, onClose, onSubmit }: BorrowE
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="endDate">समाप्ति तारीख / End Date</Label>
+              <Label htmlFor="endDate">End Date</Label>
               <Input
                 id="endDate"
                 type="date"
@@ -96,19 +96,19 @@ const BorrowEquipmentDialog = ({ equipment, isOpen, onClose, onSubmit }: BorrowE
             <div className="p-3 bg-primary/10 rounded-lg">
               <div className="flex items-center gap-1 text-lg font-semibold text-primary">
                 <IndianRupee className="h-5 w-5" />
-                कुल राशि / Total: ₹{calculateTotal()}
+                Total: ₹{calculateTotal()}
               </div>
               <div className="text-sm text-muted-foreground">
-                {Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24))} दिन / days
+                {Math.ceil((new Date(endDate).getTime() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24))} days
               </div>
             </div>
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="notes">टिप्पणी / Notes (Optional)</Label>
+            <Label htmlFor="notes">Notes (Optional)</Label>
             <Textarea
               id="notes"
-              placeholder="कोई विशेष आवश्यकता या संदेश..."
+              placeholder="Any special requirements or message..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
@@ -117,10 +117,10 @@ const BorrowEquipmentDialog = ({ equipment, isOpen, onClose, onSubmit }: BorrowE
 
           <div className="flex gap-2">
             <Button type="button" variant="outline" onClick={onClose} className="flex-1">
-              रद्द करें / Cancel
+              Cancel
             </Button>
             <Button type="submit" className="flex-1" disabled={!startDate || !endDate}>
-              अनुरोध भेजें / Send Request
+              Send Request
             </Button>
           </div>
         </form>

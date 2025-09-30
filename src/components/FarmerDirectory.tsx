@@ -73,8 +73,8 @@ const FarmerDirectory = () => {
       setFarmers(farmersWithEquipmentCount);
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
-        description: "किसान डायरेक्टरी लोड करने में समस्या हुई।",
+        title: "Error",
+        description: "Failed to load farmer directory.",
         variant: "destructive",
       });
     } finally {
@@ -104,7 +104,7 @@ const FarmerDirectory = () => {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-lg">किसान डायरेक्टरी लोड हो रही है... / Loading Farmer Directory...</p>
+          <p className="text-lg">Loading Farmer Directory...</p>
         </div>
       </div>
     );
@@ -113,8 +113,8 @@ const FarmerDirectory = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">किसान डायरेक्टरी / Farmer Directory</h1>
-        <p className="text-muted-foreground">अपने क्षेत्र के अन्य किसानों से जुड़ें और उपकरण साझा करें</p>
+        <h1 className="text-3xl font-bold mb-2">Farmer Directory</h1>
+        <p className="text-muted-foreground">Connect with other farmers in your area and share equipment</p>
       </div>
 
       {/* Search and Filter Section */}
@@ -122,7 +122,7 @@ const FarmerDirectory = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="नाम, स्थान या फसल के प्रकार से खोजें..."
+            placeholder="Search by name, location, or crop type..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -130,7 +130,7 @@ const FarmerDirectory = () => {
         </div>
         <Select value={selectedState} onValueChange={setSelectedState}>
           <SelectTrigger className="w-full md:w-[200px]">
-            <SelectValue placeholder="राज्य चुनें" />
+            <SelectValue placeholder="Select state" />
           </SelectTrigger>
           <SelectContent>
             {INDIAN_STATES.map((state) => (
@@ -145,7 +145,7 @@ const FarmerDirectory = () => {
       {/* Results Info */}
       <div className="mb-6">
         <p className="text-sm text-muted-foreground">
-          {filteredFarmers.length} किसान मिले / {filteredFarmers.length} farmers found
+          {filteredFarmers.length} farmers found
         </p>
       </div>
 
@@ -171,12 +171,12 @@ const FarmerDirectory = () => {
                 {farmer.farm_type && (
                   <div className="flex items-center gap-2">
                     <Wheat className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">फसल / Crop: {farmer.farm_type}</span>
+                    <span className="text-sm">Crop: {farmer.farm_type}</span>
                   </div>
                 )}
                 {farmer.farm_size && (
                   <div className="text-sm text-muted-foreground">
-                    खेत का आकार / Farm Size: {farmer.farm_size} एकड़ / acres
+                    Farm Size: {farmer.farm_size} acres
                   </div>
                 )}
               </div>
@@ -185,7 +185,7 @@ const FarmerDirectory = () => {
               <div className="flex items-center gap-2">
                 <Tractor className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm">
-                  {farmer.equipment_count} उपकरण उपलब्ध / {farmer.equipment_count} equipment available
+                  {farmer.equipment_count} equipment available
                 </span>
               </div>
 
@@ -200,10 +200,10 @@ const FarmerDirectory = () => {
               {/* Actions */}
               <div className="flex gap-2 pt-2">
                 <Button variant="outline" size="sm" className="flex-1">
-                  संपर्क करें / Contact
+                  Contact
                 </Button>
                 <Button variant="secondary" size="sm" className="flex-1">
-                  उपकरण देखें / View Equipment
+                  View Equipment
                 </Button>
               </div>
             </CardContent>
@@ -214,9 +214,9 @@ const FarmerDirectory = () => {
       {filteredFarmers.length === 0 && !loading && (
         <div className="text-center py-12">
           <Wheat className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-semibold mb-2">कोई किसान नहीं मिला / No Farmers Found</h3>
+          <h3 className="text-lg font-semibold mb-2">No Farmers Found</h3>
           <p className="text-muted-foreground">
-            अपने खोज मानदंडों को बदलने का प्रयास करें या बाद में फिर से जांचें।
+            Try changing your search criteria or check back later.
           </p>
         </div>
       )}

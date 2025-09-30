@@ -8,12 +8,12 @@ const Navbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", icon: Home, label: "होम / Home" },
-    { path: "/equipment", icon: Tractor, label: "उपकरण / Equipment" },
-    { path: "/farmers", icon: Users, label: "किसान / Farmers" },
-    { path: "/requests", icon: Search, label: "अनुरोध / Requests" },
-    { path: "/add-equipment", icon: Plus, label: "उपकरण जोड़ें / Add Equipment" },
-    { path: "/profile", icon: User, label: "प्रोफ़ाइल / Profile" },
+    { path: "/", icon: Home, label: "Home" },
+    { path: "/equipment", icon: Tractor, label: "Equipment" },
+    { path: "/farmers", icon: Users, label: "Farmers" },
+    { path: "/requests", icon: Search, label: "Requests" },
+    { path: "/add-equipment", icon: Plus, label: "Add Equipment" },
+    { path: "/profile", icon: User, label: "Profile" },
   ];
 
   return (
@@ -21,7 +21,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-            🌾 कृषि सहायक / Farm Helper
+            🌾 Farm Helper
           </Link>
           
           {user && (
@@ -50,7 +50,7 @@ const Navbar = () => {
                 className="flex items-center gap-1"
               >
                 <LogOut className="h-4 w-4" />
-                लॉगआउट / Logout
+                Logout
               </Button>
             </div>
           )}

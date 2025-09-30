@@ -33,14 +33,14 @@ interface EquipmentRequest {
 
 const EQUIPMENT_CATEGORIES = [
   "All Categories",
-  "ट्रैक्टर / Tractor",
-  "हल / Plough", 
-  "बुआई मशीन / Seeder",
-  "कटाई मशीन / Harvester",
-  "थ्रेशर / Thresher",
-  "पंप सेट / Pump Set",
-  "कल्टिवेटर / Cultivator",
-  "अन्य / Other"
+  "Tractor",
+  "Plough", 
+  "Seeder",
+  "Harvester",
+  "Thresher",
+  "Pump Set",
+  "Cultivator",
+  "Other"
 ];
 
 const INDIAN_STATES = [
@@ -95,8 +95,8 @@ const EquipmentRequests = () => {
       setRequests((data as any) || []);
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
-        description: "उपकरण अनुरोध लोड करने में समस्या हुई।",
+        title: "Error",
+        description: "Failed to load equipment requests.",
         variant: "destructive",
       });
     } finally {
@@ -127,8 +127,8 @@ const EquipmentRequests = () => {
     
     if (!user) {
       toast({
-        title: "लॉगिन आवश्यक / Login Required",
-        description: "कृपया पहले लॉगिन करें।",
+        title: "Login Required",
+        description: "Please login first.",
         variant: "destructive",
       });
       return;
@@ -152,8 +152,8 @@ const EquipmentRequests = () => {
       if (error) throw error;
 
       toast({
-        title: "अनुरोध जमा हुआ! / Request Submitted!",
-        description: "आपका उपकरण अनुरोध सफलतापूर्वक जमा हो गया है।",
+        title: "Request Submitted!",
+        description: "Your equipment request has been successfully submitted.",
       });
 
       setNewRequest({
@@ -170,7 +170,7 @@ const EquipmentRequests = () => {
       fetchRequests();
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -185,7 +185,7 @@ const EquipmentRequests = () => {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-center min-h-[400px]">
-          <p className="text-lg">उपकरण अनुरोध लोड हो रहे हैं... / Loading Equipment Requests...</p>
+          <p className="text-lg">Loading Equipment Requests...</p>
         </div>
       </div>
     );
@@ -195,8 +195,8 @@ const EquipmentRequests = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8 flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold mb-2">उपकरण अनुरोध / Equipment Requests</h1>
-          <p className="text-muted-foreground">जरूरी उपकरण खोजें या अपनी आवश्यकता पोस्ट करें</p>
+          <h1 className="text-3xl font-bold mb-2">Equipment Requests</h1>
+          <p className="text-muted-foreground">Find equipment you need or post your requirements</p>
         </div>
         
         {user && (
@@ -204,37 +204,37 @@ const EquipmentRequests = () => {
             <DialogTrigger asChild>
               <Button className="flex items-center gap-2">
                 <Plus className="h-4 w-4" />
-                नया अनुरोध / New Request
+                New Request
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-md">
               <DialogHeader>
-                <DialogTitle>उपकरण अनुरोध करें / Request Equipment</DialogTitle>
+                <DialogTitle>Request Equipment</DialogTitle>
                 <DialogDescription>
-                  जिस उपकरण की आपको जरूरत है उसकी जानकारी दें
+                  Provide details about the equipment you need
                 </DialogDescription>
               </DialogHeader>
               <form onSubmit={handleSubmitRequest} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="title">शीर्षक / Title</Label>
+                  <Label htmlFor="title">Title</Label>
                   <Input
                     id="title"
                     value={newRequest.title}
                     onChange={(e) => setNewRequest({ ...newRequest, title: e.target.value })}
-                    placeholder="जैसे: ट्रैक्टर चाहिए जुताई के लिए"
+                    placeholder="e.g., Tractor needed for ploughing"
                     required
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="category">श्रेणी / Category</Label>
+                  <Label htmlFor="category">Category</Label>
                   <Select
                     value={newRequest.category}
                     onValueChange={(value) => setNewRequest({ ...newRequest, category: value })}
                     required
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="श्रेणी चुनें" />
+                      <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
                       {EQUIPMENT_CATEGORIES.slice(1).map((category) => (
@@ -248,24 +248,24 @@ const EquipmentRequests = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="location">स्थान / Location</Label>
+                    <Label htmlFor="location">Location</Label>
                     <Input
                       id="location"
                       value={newRequest.location}
                       onChange={(e) => setNewRequest({ ...newRequest, location: e.target.value })}
-                      placeholder="गाँव/शहर"
+                      placeholder="Village/City"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="state">राज्य / State</Label>
+                    <Label htmlFor="state">State</Label>
                     <Select
                       value={newRequest.state}
                       onValueChange={(value) => setNewRequest({ ...newRequest, state: value })}
                       required
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="राज्य" />
+                        <SelectValue placeholder="State" />
                       </SelectTrigger>
                       <SelectContent>
                         {INDIAN_STATES.map((state) => (
@@ -280,7 +280,7 @@ const EquipmentRequests = () => {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="required_date">आवश्यक दिनांक / Required Date</Label>
+                    <Label htmlFor="required_date">Required Date</Label>
                     <Input
                       id="required_date"
                       type="date"
@@ -290,7 +290,7 @@ const EquipmentRequests = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="duration">अवधि (दिन) / Duration (Days)</Label>
+                    <Label htmlFor="duration">Duration (Days)</Label>
                     <Input
                       id="duration"
                       type="number"
@@ -303,7 +303,7 @@ const EquipmentRequests = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="budget">बजट प्रति दिन / Budget Per Day (₹)</Label>
+                  <Label htmlFor="budget">Budget Per Day (₹)</Label>
                   <Input
                     id="budget"
                     type="number"
@@ -316,22 +316,22 @@ const EquipmentRequests = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="description">विवरण / Description</Label>
+                  <Label htmlFor="description">Description</Label>
                   <Textarea
                     id="description"
                     value={newRequest.description}
                     onChange={(e) => setNewRequest({ ...newRequest, description: e.target.value })}
-                    placeholder="अतिरिक्त जानकारी या विशिष्ट आवश्यकताएं"
+                    placeholder="Additional information or specific requirements"
                     rows={3}
                   />
                 </div>
 
                 <div className="flex gap-2 pt-2">
                   <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} className="flex-1">
-                    रद्द करें / Cancel
+                    Cancel
                   </Button>
                   <Button type="submit" className="flex-1">
-                    अनुरोध जमा करें / Submit Request
+                    Submit Request
                   </Button>
                 </div>
               </form>
@@ -345,7 +345,7 @@ const EquipmentRequests = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="शीर्षक या स्थान से खोजें..."
+            placeholder="Search by title or location..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -353,7 +353,7 @@ const EquipmentRequests = () => {
         </div>
         <Select value={selectedCategory} onValueChange={setSelectedCategory}>
           <SelectTrigger className="w-full md:w-[200px]">
-            <SelectValue placeholder="श्रेणी चुनें" />
+            <SelectValue placeholder="Select category" />
           </SelectTrigger>
           <SelectContent>
             {EQUIPMENT_CATEGORIES.map((category) => (
@@ -368,7 +368,7 @@ const EquipmentRequests = () => {
       {/* Results Info */}
       <div className="mb-6">
         <p className="text-sm text-muted-foreground">
-          {filteredRequests.length} अनुरोध मिले / {filteredRequests.length} requests found
+          {filteredRequests.length} requests found
         </p>
       </div>
 
@@ -393,22 +393,22 @@ const EquipmentRequests = () => {
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span>आवश्यक: {formatDate(request.required_date)}</span>
+                  <span>Required: {formatDate(request.required_date)}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-muted-foreground" />
-                  <span>{request.duration_days} दिन / {request.duration_days} days</span>
+                  <span>{request.duration_days} days</span>
                 </div>
                 {request.budget_per_day && (
                   <div className="flex items-center gap-2">
                     <IndianRupee className="h-4 w-4 text-muted-foreground" />
-                    <span>बजट: ₹{request.budget_per_day}/दिन</span>
+                    <span>Budget: ₹{request.budget_per_day}/day</span>
                   </div>
                 )}
               </div>
 
               <div className="border-t pt-4">
-                <p className="text-sm text-muted-foreground mb-2">अनुरोधकर्ता / Requested by:</p>
+                <p className="text-sm text-muted-foreground mb-2">Requested by:</p>
                 <p className="font-medium">{request.farmer_profile?.full_name}</p>
                 {request.farmer_profile?.phone && (
                   <p className="text-sm text-muted-foreground">{request.farmer_profile.phone}</p>
@@ -416,7 +416,7 @@ const EquipmentRequests = () => {
               </div>
 
               <Button className="w-full" size="sm">
-                सहायता करें / Help
+                Help
               </Button>
             </CardContent>
           </Card>
@@ -426,9 +426,9 @@ const EquipmentRequests = () => {
       {filteredRequests.length === 0 && !loading && (
         <div className="text-center py-12">
           <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <h3 className="text-lg font-semibold mb-2">कोई अनुरोध नहीं मिला / No Requests Found</h3>
+          <h3 className="text-lg font-semibold mb-2">No Requests Found</h3>
           <p className="text-muted-foreground">
-            अपने खोज मानदंडों को बदलने का प्रयास करें या बाद में फिर से जांचें।
+            Try changing your search criteria or check back later.
           </p>
         </div>
       )}

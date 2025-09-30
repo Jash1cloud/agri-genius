@@ -64,8 +64,8 @@ const Profile = () => {
       }
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
-        description: "प्रोफाइल लोड करने में समस्या हुई।",
+        title: "Error",
+        description: "Failed to load profile.",
         variant: "destructive",
       });
     }
@@ -126,12 +126,12 @@ const Profile = () => {
       if (error) throw error;
 
       toast({
-        title: "प्रोफाइल अपडेट हुआ! / Profile Updated!",
-        description: "आपकी जानकारी सफलतापूर्वक सहेजी गई है।",
+        title: "Profile Updated!",
+        description: "Your information has been saved successfully.",
       });
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -150,14 +150,14 @@ const Profile = () => {
       if (error) throw error;
 
       toast({
-        title: "स्थिति अपडेट हुई! / Status Updated!",
+        title: "Status Updated!",
         description: `Transaction status updated to ${status}`,
       });
 
       fetchMyTransactions();
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -177,15 +177,15 @@ const Profile = () => {
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">प्रोफ़ाइल / Profile</h1>
-        <p className="text-muted-foreground">अपनी जानकारी और गतिविधि प्रबंधित करें</p>
+        <h1 className="text-3xl font-bold mb-2">Profile</h1>
+        <p className="text-muted-foreground">Manage your information and activity</p>
       </div>
 
       <Tabs defaultValue="profile" className="space-y-6">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="profile">प्रोफ़ाइल / Profile</TabsTrigger>
-          <TabsTrigger value="equipment">मेरे उपकरण / My Equipment</TabsTrigger>
-          <TabsTrigger value="transactions">लेन-देन / Transactions</TabsTrigger>
+          <TabsTrigger value="profile">Profile</TabsTrigger>
+          <TabsTrigger value="equipment">My Equipment</TabsTrigger>
+          <TabsTrigger value="transactions">Transactions</TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile">
@@ -193,24 +193,24 @@ const Profile = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <User className="h-5 w-5" />
-                व्यक्तिगत जानकारी / Personal Information
+                Personal Information
               </CardTitle>
-              <CardDescription>अपनी प्रोफाइल की जानकारी अपडेट करें</CardDescription>
+              <CardDescription>Update your profile information</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleProfileUpdate} className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="fullName">पूरा नाम / Full Name</Label>
+                    <Label htmlFor="fullName">Full Name</Label>
                     <Input
                       id="fullName"
                       value={profile.full_name}
                       onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
-                      placeholder="आपका पूरा नाम"
+                      placeholder="Your full name"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone">फ़ोन नंबर / Phone</Label>
+                    <Label htmlFor="phone">Phone</Label>
                     <Input
                       id="phone"
                       value={profile.phone}
@@ -222,22 +222,22 @@ const Profile = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="location">शहर/गाँव / City/Village</Label>
+                    <Label htmlFor="location">City/Village</Label>
                     <Input
                       id="location"
                       value={profile.location}
                       onChange={(e) => setProfile({ ...profile, location: e.target.value })}
-                      placeholder="आपका शहर या गाँव"
+                      placeholder="Your city or village"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="state">राज्य / State</Label>
+                    <Label htmlFor="state">State</Label>
                     <Select
                       value={profile.state}
                       onValueChange={(value) => setProfile({ ...profile, state: value })}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="राज्य चुनें" />
+                        <SelectValue placeholder="Select state" />
                       </SelectTrigger>
                       <SelectContent>
                         {INDIAN_STATES.map((state) => (
@@ -252,7 +252,7 @@ const Profile = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="farmSize">खेत का आकार (एकड़) / Farm Size (Acres)</Label>
+                    <Label htmlFor="farmSize">Farm Size (Acres)</Label>
                     <Input
                       id="farmSize"
                       type="number"
@@ -263,18 +263,18 @@ const Profile = () => {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="farmType">खेती का प्रकार / Farm Type</Label>
+                    <Label htmlFor="farmType">Farm Type</Label>
                     <Input
                       id="farmType"
                       value={profile.farm_type}
                       onChange={(e) => setProfile({ ...profile, farm_type: e.target.value })}
-                      placeholder="जैसे: धान, गेहूं, सब्जी"
+                      placeholder="e.g., Rice, Wheat, Vegetables"
                     />
                   </div>
                 </div>
 
                 <Button type="submit" disabled={isLoading}>
-                  {isLoading ? "सहेजा जा रहा है..." : "प्रोफाइल सहेजें / Save Profile"}
+                  {isLoading ? "Saving..." : "Save Profile"}
                 </Button>
               </form>
             </CardContent>
@@ -286,7 +286,7 @@ const Profile = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Tractor className="h-5 w-5" />
-                मेरे उपकरण / My Equipment ({myEquipment.length})
+                My Equipment ({myEquipment.length})
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -296,14 +296,14 @@ const Profile = () => {
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="font-semibold">{item.name}</h3>
                       <Badge variant={item.is_available ? "default" : "secondary"}>
-                        {item.is_available ? "उपलब्ध / Available" : "उधार में / Rented"}
+                        {item.is_available ? "Available" : "Rented"}
                       </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
                     <div className="flex items-center gap-4 text-sm">
                       <span className="flex items-center gap-1">
                         <IndianRupee className="h-4 w-4" />
-                        ₹{item.rental_price_per_day}/दिन
+                        ₹{item.rental_price_per_day}/day
                       </span>
                       <span>{item.category}</span>
                       <span>{item.location}, {item.state}</span>
@@ -312,7 +312,7 @@ const Profile = () => {
                 ))}
                 {myEquipment.length === 0 && (
                   <p className="text-center text-muted-foreground py-8">
-                    आपने अभी तक कोई उपकरण नहीं जोड़ा है। / No equipment added yet.
+                    No equipment added yet.
                   </p>
                 )}
               </div>
@@ -325,7 +325,7 @@ const Profile = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calendar className="h-5 w-5" />
-                लेन-देन इतिहास / Transaction History ({myTransactions.length})
+                Transaction History ({myTransactions.length})
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -336,10 +336,10 @@ const Profile = () => {
                       <div>
                         <h3 className="font-semibold">{transaction.equipment?.name}</h3>
                         <p className="text-sm text-muted-foreground">
-                          {transaction.borrower_id === user?.id ? "आपने उधार लिया / You borrowed" : "आपने उधार दिया / You lent"} • 
+                          {transaction.borrower_id === user?.id ? "You borrowed" : "You lent"} • 
                           {transaction.borrower_id === user?.id 
-                            ? ` से / from: ${transaction.owner_profile?.full_name}`
-                            : ` को / to: ${transaction.borrower_profile?.full_name}`
+                            ? ` from: ${transaction.owner_profile?.full_name}`
+                            : ` to: ${transaction.borrower_profile?.full_name}`
                           }
                         </p>
                       </div>
@@ -349,19 +349,19 @@ const Profile = () => {
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
                       <div>
-                        <span className="text-muted-foreground">शुरू / Start:</span><br />
-                        {new Date(transaction.start_date).toLocaleDateString('hi-IN')}
+                        <span className="text-muted-foreground">Start:</span><br />
+                        {new Date(transaction.start_date).toLocaleDateString('en-IN')}
                       </div>
                       <div>
-                        <span className="text-muted-foreground">समाप्ति / End:</span><br />
-                        {new Date(transaction.end_date).toLocaleDateString('hi-IN')}
+                        <span className="text-muted-foreground">End:</span><br />
+                        {new Date(transaction.end_date).toLocaleDateString('en-IN')}
                       </div>
                       <div>
-                        <span className="text-muted-foreground">राशि / Amount:</span><br />
+                        <span className="text-muted-foreground">Amount:</span><br />
                         ₹{transaction.total_amount}
                       </div>
                       <div>
-                        <span className="text-muted-foreground">स्थिति / Status:</span><br />
+                        <span className="text-muted-foreground">Status:</span><br />
                         {transaction.status}
                       </div>
                     </div>
@@ -372,14 +372,14 @@ const Profile = () => {
                           size="sm"
                           onClick={() => updateTransactionStatus(transaction.id, 'approved')}
                         >
-                          स्वीकार करें / Approve
+                          Approve
                         </Button>
                         <Button
                           size="sm"
                           variant="outline"
                           onClick={() => updateTransactionStatus(transaction.id, 'rejected')}
                         >
-                          अस्वीकार करें / Reject
+                          Reject
                         </Button>
                       </div>
                     )}
@@ -387,7 +387,7 @@ const Profile = () => {
                 ))}
                 {myTransactions.length === 0 && (
                   <p className="text-center text-muted-foreground py-8">
-                    कोई लेन-देन इतिहास नहीं मिला। / No transaction history found.
+                    No transaction history found.
                   </p>
                 )}
               </div>

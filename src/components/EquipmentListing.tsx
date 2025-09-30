@@ -41,8 +41,8 @@ const EquipmentListing = () => {
       setEquipment((data as any) || []);
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
-        description: "उपकरण लोड करने में समस्या हुई।",
+        title: "Error",
+        description: "Failed to load equipment.",
         variant: "destructive",
       });
     } finally {
@@ -84,15 +84,15 @@ const EquipmentListing = () => {
       if (error) throw error;
 
       toast({
-        title: "अनुरोध भेजा गया! / Request Sent!",
-        description: "आपका उधार अनुरोध मालिक को भेजा गया है।",
+        title: "Request Sent!",
+        description: "Your borrow request has been sent to the owner.",
       });
 
       setSelectedEquipment(null);
       fetchEquipment();
     } catch (error: any) {
       toast({
-        title: "त्रुटि / Error",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -100,15 +100,15 @@ const EquipmentListing = () => {
   };
 
   if (loading) {
-    return <div className="flex justify-center py-8">लोड हो रहा है... / Loading...</div>;
+    return <div className="flex justify-center py-8">Loading...</div>;
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">उपकरण किराए पर लें / Rent Equipment</h1>
+        <h1 className="text-3xl font-bold mb-2">Rent Equipment</h1>
         <p className="text-muted-foreground">
-          अन्य किसानों से कृषि उपकरण किराए पर लें / Rent farming equipment from other farmers
+          Rent farming equipment from other farmers
         </p>
       </div>
 
@@ -135,12 +135,12 @@ const EquipmentListing = () => {
 
               <div className="flex items-center gap-2 text-lg font-semibold text-primary">
                 <IndianRupee className="h-5 w-5" />
-                {item.rental_price_per_day}/दिन
+                {item.rental_price_per_day}/day
               </div>
 
               {item.specifications && (
                 <div className="text-sm">
-                  <strong>विवरण / Specifications:</strong>
+                  <strong>Specifications:</strong>
                   <pre className="text-xs mt-1 p-2 bg-muted rounded">
                     {JSON.stringify(item.specifications, null, 2)}
                   </pre>
@@ -152,7 +152,7 @@ const EquipmentListing = () => {
                 className="w-full"
                 disabled={!user}
               >
-                किराए पर लें / Borrow
+                Borrow
               </Button>
             </CardContent>
           </Card>
@@ -162,7 +162,7 @@ const EquipmentListing = () => {
       {equipment.length === 0 && (
         <div className="text-center py-12">
           <p className="text-lg text-muted-foreground">
-            कोई उपकरण उपलब्ध नहीं है। / No equipment available at the moment.
+            No equipment available at the moment.
           </p>
         </div>
       )}
