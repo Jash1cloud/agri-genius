@@ -10,10 +10,7 @@ interface Equipment {
   id: string;
   name: string;
   rental_price_per_day: number;
-  profiles: {
-    full_name: string;
-    phone: string;
-  };
+  owner_id: string;
 }
 
 interface BorrowEquipmentDialogProps {
@@ -61,7 +58,7 @@ const BorrowEquipmentDialog = ({ equipment, isOpen, onClose, onSubmit }: BorrowE
             <div className="p-3 bg-muted rounded-lg">
               <div className="font-semibold">{equipment.name}</div>
               <div className="text-sm text-muted-foreground">
-                मालिक / Owner: {equipment.profiles?.full_name}
+                Owner ID: {equipment.owner_id.substring(0, 8)}...
               </div>
               <div className="flex items-center gap-1 text-sm font-medium">
                 <IndianRupee className="h-4 w-4" />

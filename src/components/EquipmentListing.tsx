@@ -20,10 +20,6 @@ interface Equipment {
   specifications: any;
   created_at: string;
   owner_id: string;
-  profiles: {
-    full_name: string;
-    phone: string;
-  } | null;
 }
 
 const EquipmentListing = () => {
@@ -37,13 +33,7 @@ const EquipmentListing = () => {
     try {
       const { data, error } = await supabase
         .from("equipment")
-        .select(`
-          *,
-          profiles!owner_id (
-            full_name,
-            phone
-          )
-        `)
+        .select("*")
         .eq("is_available", true)
         .order("created_at", { ascending: false });
 
@@ -140,7 +130,7 @@ const EquipmentListing = () => {
               
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <User className="h-4 w-4" />
-                {item.profiles?.full_name || "Unknown Owner"}
+                Owner ID: {item.owner_id.substring(0, 8)}...
               </div>
 
               <div className="flex items-center gap-2 text-lg font-semibold text-primary">
