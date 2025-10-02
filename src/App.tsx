@@ -12,6 +12,7 @@ import AddEquipmentPage from "./pages/AddEquipmentPage";
 import ProfilePage from "./pages/ProfilePage";
 import FarmerDirectoryPage from "./pages/FarmerDirectoryPage";
 import EquipmentRequestsPage from "./pages/EquipmentRequestsPage";
+import ExportQualityPage from "./pages/ExportQualityPage";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/requests" element={<EquipmentRequestsPage />} />
             <Route path="/add-equipment" element={<AddEquipmentPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/export-quality" element={<ExportQualityPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
