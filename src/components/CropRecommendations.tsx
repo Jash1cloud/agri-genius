@@ -34,7 +34,7 @@ interface CropRecommendationsProps {
 const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
   // Generate location and condition-specific recommendations
   const getRecommendations = (): CropData[] => {
-    const { soilType, climate, budget, location, farmSize } = farmData;
+    const { soilType, climate, budget, location, farmSize, waterAvailability } = farmData;
     
     // Crop database with conditions and regional suitability
     const cropDatabase = {
@@ -210,7 +210,20 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         reasons.push(`fits within your budget range`);
       }
 
-      if (score >= 50) { // Minimum threshold
+      // Water availability compatibility (20% weight) - NEW
+      if (waterAvailability) {
+        const waterScore = calculateWaterScore(crop.waterRequirement, waterAvailability);
+        score += waterScore;
+        if (waterScore >= 15) {
+          reasons.push(`excellent water requirement match`);
+        } else if (waterScore >= 10) {
+          reasons.push(`good water availability for this crop`);
+        } else if (waterScore > 0) {
+          reasons.push(`manageable with efficient irrigation`);
+        }
+      }
+
+      if (score >= 60) { // Minimum threshold (increased from 50 to account for water scoring)
         const risks = generateRisks(crop, climate, soilType);
         const benefits = generateBenefits(crop, climate, soilType, location);
         
@@ -234,6 +247,16 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
     return suitableCrops
       .sort((a, b) => b.confidence - a.confidence)
       .slice(0, 3);
+  };
+
+  const calculateWaterScore = (cropWaterReq: string, waterAvail: string): number => {
+    // Water requirement vs availability scoring matrix
+    const scoreMatrix: Record<string, Record<string, number>> = {
+      high: { abundant: 20, moderate: 10, limited: 5, scarce: 0 },
+      medium: { abundant: 20, moderate: 20, limited: 10, scarce: 5 },
+      low: { abundant: 15, moderate: 20, limited: 20, scarce: 15 }
+    };
+    return scoreMatrix[cropWaterReq]?.[waterAvail] || 0;
   };
 
   const generateRisks = (crop: any, climate: string, soilType: string): string[] => {
@@ -325,7 +348,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
 
         {/* Farm Summary */}
         <Card className="p-6 mb-8 bg-muted/50">
-          <div className="grid md:grid-cols-4 gap-4 text-sm">
+          <div className="grid md:grid-cols-5 gap-4 text-sm">
             <div>
               <span className="text-muted-foreground">Location:</span>
               <div className="font-medium">{farmData.location}</div>
@@ -341,6 +364,10 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
             <div>
               <span className="text-muted-foreground">Climate:</span>
               <div className="font-medium capitalize">{farmData.climate}</div>
+            </div>
+            <div>
+              <span className="text-muted-foreground">Water Availability:</span>
+              <div className="font-medium capitalize">{farmData.waterAvailability}</div>
             </div>
           </div>
         </Card>

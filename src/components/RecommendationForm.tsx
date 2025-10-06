@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Thermometer, CloudRain, DollarSign, Globe } from "lucide-react";
+import { MapPin, Thermometer, CloudRain, DollarSign, Globe, Droplets } from "lucide-react";
 import { toast } from "sonner";
 
 interface FormData {
@@ -17,6 +17,7 @@ interface FormData {
   previousCrop: string;
   notes: string;
   language: string;
+  waterAvailability: string;
 }
 
 interface RecommendationFormProps {
@@ -32,14 +33,15 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
     budget: "",
     previousCrop: "",
     notes: "",
-    language: "english"
+    language: "english",
+    waterAvailability: ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.location || !formData.farmSize || !formData.soilType || !formData.climate) {
+    if (!formData.location || !formData.farmSize || !formData.soilType || !formData.climate || !formData.waterAvailability) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -155,6 +157,25 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            {/* Water Availability */}
+            <div className="space-y-2">
+              <Label className="text-base font-medium flex items-center gap-2">
+                <Droplets className="w-4 h-4 text-primary" />
+                Water Availability *
+              </Label>
+              <Select onValueChange={(value) => handleInputChange("waterAvailability", value)}>
+                <SelectTrigger className="h-12">
+                  <SelectValue placeholder="Select water availability" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="abundant">Abundant - Canal/River/Good Rainfall (प्रचुर जल)</SelectItem>
+                  <SelectItem value="moderate">Moderate - Tube well/Seasonal rain (मध्यम जल)</SelectItem>
+                  <SelectItem value="limited">Limited - Borewells/Uncertain rain (सीमित जल)</SelectItem>
+                  <SelectItem value="scarce">Scarce - Rain-dependent only (कम जल)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Budget & Previous Crop */}
