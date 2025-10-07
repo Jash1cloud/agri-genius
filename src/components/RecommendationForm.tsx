@@ -51,7 +51,60 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
   };
 
   const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => {
+      const updated = { ...prev, [field]: value };
+      // Reset budget when farm size changes
+      if (field === "farmSize") {
+        updated.budget = "";
+      }
+      return updated;
+    });
+  };
+
+  // Dynamic budget ranges based on farm size
+  const getBudgetOptions = () => {
+    const size = parseFloat(formData.farmSize) || 0;
+    
+    if (size === 0) {
+      return [
+        { value: "low", label: "Under ₹4,00,000" },
+        { value: "medium", label: "₹4,00,000 - ₹15,00,000" },
+        { value: "high", label: "₹15,00,000 - ₹40,00,000" },
+        { value: "premium", label: "Above ₹40,00,000" }
+      ];
+    } else if (size <= 2) {
+      // Small farms (0-2 acres)
+      return [
+        { value: "low", label: "Under ₹50,000" },
+        { value: "medium", label: "₹50,000 - ₹2,00,000" },
+        { value: "high", label: "₹2,00,000 - ₹5,00,000" },
+        { value: "premium", label: "Above ₹5,00,000" }
+      ];
+    } else if (size <= 5) {
+      // Medium farms (2-5 acres)
+      return [
+        { value: "low", label: "Under ₹2,00,000" },
+        { value: "medium", label: "₹2,00,000 - ₹8,00,000" },
+        { value: "high", label: "₹8,00,000 - ₹20,00,000" },
+        { value: "premium", label: "Above ₹20,00,000" }
+      ];
+    } else if (size <= 10) {
+      // Large farms (5-10 acres)
+      return [
+        { value: "low", label: "Under ₹4,00,000" },
+        { value: "medium", label: "₹4,00,000 - ₹15,00,000" },
+        { value: "high", label: "₹15,00,000 - ₹40,00,000" },
+        { value: "premium", label: "Above ₹40,00,000" }
+      ];
+    } else {
+      // Very large farms (10+ acres)
+      return [
+        { value: "low", label: "Under ₹10,00,000" },
+        { value: "medium", label: "₹10,00,000 - ₹30,00,000" },
+        { value: "high", label: "₹30,00,000 - ₹80,00,000" },
+        { value: "premium", label: "Above ₹80,00,000" }
+      ];
+    }
   };
 
   return (
@@ -181,16 +234,22 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
             {/* Budget & Previous Crop */}
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label className="text-base font-medium">Budget Range</Label>
-                <Select onValueChange={(value) => handleInputChange("budget", value)}>
+                <Label className="text-base font-medium">
+                  Budget Range {formData.farmSize && `(for ${formData.farmSize} acres)`}
+                </Label>
+                <Select 
+                  value={formData.budget} 
+                  onValueChange={(value) => handleInputChange("budget", value)}
+                >
                   <SelectTrigger className="h-12">
                     <SelectValue placeholder="Select budget range" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="low">Under ₹4,00,000</SelectItem>
-                    <SelectItem value="medium">₹4,00,000 - ₹15,00,000</SelectItem>
-                    <SelectItem value="high">₹15,00,000 - ₹40,00,000</SelectItem>
-                    <SelectItem value="premium">Above ₹40,00,000</SelectItem>
+                    {getBudgetOptions().map(option => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
