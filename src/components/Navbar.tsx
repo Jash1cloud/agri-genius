@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useLocation } from "react-router-dom";
-import { Tractor, Home, Plus, User, LogOut, Users, Search, Award } from "lucide-react";
+import { Tractor, Home, Plus, User, LogOut, Users, Search, Award, Scan } from "lucide-react";
 
 const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -13,6 +13,7 @@ const Navbar = () => {
     { path: "/farmers", icon: Users, label: "Farmers" },
     { path: "/requests", icon: Search, label: "Requests" },
     { path: "/export-quality", icon: Award, label: "Export Quality" },
+    { path: "/crop-disease", icon: Scan, label: "Disease Detection" },
     { path: "/add-equipment", icon: Plus, label: "Add Equipment" },
     { path: "/profile", icon: User, label: "Profile" },
   ];
