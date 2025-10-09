@@ -8,7 +8,7 @@ import EquipmentQuickActions from "@/components/EquipmentQuickActions";
 import RecommendationForm from "@/components/RecommendationForm";
 import CropRecommendations from "@/components/CropRecommendations";
 import Navbar from "@/components/Navbar";
-import { Award, TrendingUp, Globe, Scan, Camera, AlertCircle } from "lucide-react";
+import { Award, TrendingUp, Globe, Scan, Camera, AlertCircle, FileText, CheckCircle } from "lucide-react";
 
 const Index = () => {
   const [recommendations, setRecommendations] = useState(null);
@@ -110,6 +110,76 @@ const Index = () => {
                 </div>
               </div>
             </Card>
+          </div>
+        </div>
+      </div>
+      
+      {/* Government Schemes Feature Section */}
+      <div className="py-12 px-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <Card className="p-8 bg-background shadow-xl order-2 md:order-1">
+              <div className="aspect-square rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6">
+                <div className="text-center space-y-4">
+                  <div className="w-24 h-24 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
+                    <FileText className="h-12 w-12 text-primary" />
+                  </div>
+                  <div className="space-y-2">
+                    <p className="font-semibold text-lg">Scheme Eligibility</p>
+                    <p className="text-sm text-muted-foreground">Get matched with benefits</p>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-3 text-center">
+                <div className="p-3 bg-muted rounded-lg">
+                  <p className="text-2xl font-bold text-primary">50+</p>
+                  <p className="text-xs text-muted-foreground">Schemes</p>
+                </div>
+                <div className="p-3 bg-muted rounded-lg">
+                  <p className="text-2xl font-bold text-primary">Central</p>
+                  <p className="text-xs text-muted-foreground">& State</p>
+                </div>
+                <div className="p-3 bg-muted rounded-lg">
+                  <p className="text-2xl font-bold text-primary">100%</p>
+                  <p className="text-xs text-muted-foreground">Free</p>
+                </div>
+              </div>
+            </Card>
+            
+            <div className="space-y-6 order-1 md:order-2">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-semibold">
+                <Award className="h-4 w-4" />
+                Government Benefits
+              </div>
+              <h2 className="text-4xl font-bold text-foreground">
+                Discover Your Eligible Schemes
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Get personalized recommendations for government subsidies, insurance, credit facilities, and infrastructure support based on your farm profile.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-start gap-3">
+                  <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-sm">Profile-Based</p>
+                    <p className="text-xs text-muted-foreground">Tailored to your farm</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <FileText className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
+                  <div>
+                    <p className="font-semibold text-sm">Full Details</p>
+                    <p className="text-xs text-muted-foreground">Application & documents</p>
+                  </div>
+                </div>
+              </div>
+              <Link to="/government-schemes">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-lg px-8">
+                  <Award className="h-5 w-5 mr-2" />
+                  Explore Schemes
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

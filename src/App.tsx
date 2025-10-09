@@ -14,6 +14,7 @@ import FarmerDirectoryPage from "./pages/FarmerDirectoryPage";
 import EquipmentRequestsPage from "./pages/EquipmentRequestsPage";
 import ExportQualityPage from "./pages/ExportQualityPage";
 import CropDiseaseDetectionPage from "./pages/CropDiseaseDetectionPage";
+import GovernmentSchemesPage from "./pages/GovernmentSchemesPage";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/export-quality" element={<ExportQualityPage />} />
             <Route path="/crop-disease" element={<CropDiseaseDetectionPage />} />
+            <Route path="/government-schemes" element={<GovernmentSchemesPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
