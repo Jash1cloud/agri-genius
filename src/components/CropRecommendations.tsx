@@ -34,7 +34,7 @@ interface CropRecommendationsProps {
 const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
   // Generate location and condition-specific recommendations
   const getRecommendations = (): CropData[] => {
-    const { soilType, climate, budget, location, farmSize, waterAvailability } = farmData;
+    const { soilType, climate, budget, location, farmSize, waterAvailability, season } = farmData;
     
     // Crop database with conditions and regional suitability
     const cropDatabase = {
@@ -44,6 +44,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["tropical", "subtropical"],
         soils: ["clay", "loam"],
         regions: ["asia", "india", "bangladesh", "vietnam", "thailand", "philippines"],
+        seasons: ["kharif"],
         confidence: 95,
         expectedYield: "4-6 tons/acre",
         growthPeriod: "3-6 months",
@@ -57,6 +58,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["tropical", "subtropical"],
         soils: ["loam", "clay"],
         regions: ["brazil", "india", "thailand", "australia", "philippines"],
+        seasons: ["year-round"],
         confidence: 88,
         expectedYield: "50-80 tons/acre",
         growthPeriod: "12-18 months",
@@ -71,6 +73,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["temperate", "semi-arid", "subtropical"],
         soils: ["alluvial", "black-cotton", "red-laterite"],
         regions: ["punjab", "haryana", "uttar-pradesh", "madhya-pradesh", "rajasthan"],
+        seasons: ["rabi"],
         confidence: 94,
         expectedYield: "3.5-5 tons/acre",
         growthPeriod: "4-6 months (Nov-Apr)",
@@ -84,6 +87,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["subtropical", "temperate"],
         soils: ["alluvial", "black-cotton", "red-laterite"],
         regions: ["karnataka", "andhra-pradesh", "telangana", "maharashtra", "bihar"],
+        seasons: ["kharif", "rabi"],
         confidence: 91,
         expectedYield: "6-12 tons/acre",
         growthPeriod: "3-4 months (Kharif)",
@@ -98,6 +102,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["semi-arid", "subtropical"],
         soils: ["black-cotton", "alluvial"],
         regions: ["gujarat", "maharashtra", "telangana", "andhra-pradesh", "haryana"],
+        seasons: ["kharif"],
         confidence: 90,
         expectedYield: "15-25 quintals/acre",
         growthPeriod: "5-6 months (Kharif)",
@@ -111,6 +116,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["arid", "semi-arid"],
         soils: ["desert", "red-laterite", "alluvial"],
         regions: ["rajasthan", "gujarat", "haryana", "maharashtra"],
+        seasons: ["kharif", "zaid"],
         confidence: 88,
         expectedYield: "1.5-3 tons/acre",
         growthPeriod: "2-4 months (Kharif)",
@@ -124,6 +130,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["temperate", "semi-arid"],
         soils: ["alluvial", "black-cotton"],
         regions: ["rajasthan", "haryana", "madhya-pradesh", "uttar-pradesh"],
+        seasons: ["rabi"],
         confidence: 85,
         expectedYield: "1-2 tons/acre",
         growthPeriod: "3-4 months (Rabi)",
@@ -138,6 +145,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["semi-arid", "temperate"],
         soils: ["black-cotton", "alluvial", "red-laterite"],
         regions: ["madhya-pradesh", "rajasthan", "maharashtra", "andhra-pradesh"],
+        seasons: ["rabi"],
         confidence: 87,
         expectedYield: "1.5-2.5 tons/acre",
         growthPeriod: "4-5 months (Rabi)",
@@ -151,6 +159,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
         climates: ["subtropical", "temperate"],
         soils: ["black-cotton", "alluvial"],
         regions: ["madhya-pradesh", "maharashtra", "rajasthan", "chhattisgarh"],
+        seasons: ["kharif"],
         confidence: 85,
         expectedYield: "2.5-4 tons/acre",
         growthPeriod: "3-4 months (Kharif)",
@@ -197,6 +206,17 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
       } else {
         score += 5;
         reasons.push(`emerging crop for your area`);
+      }
+
+      // Season match (15% weight)
+      if (crop.seasons && season) {
+        if (crop.seasons.includes(season) || crop.seasons.includes("year-round")) {
+          score += 15;
+          reasons.push(`perfect for ${season} season planting`);
+        } else {
+          score -= 10; // Penalty for wrong season
+          reasons.push(`not ideal for ${season} season`);
+        }
       }
       
       // Budget compatibility (10% weight)
@@ -348,7 +368,7 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
 
         {/* Farm Summary */}
         <Card className="p-6 mb-8 bg-muted/50">
-          <div className="grid md:grid-cols-5 gap-4 text-sm">
+          <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4 text-sm">
             <div>
               <span className="text-muted-foreground">Location:</span>
               <div className="font-medium">{farmData.location}</div>
@@ -368,6 +388,10 @@ const CropRecommendations = ({ farmData }: CropRecommendationsProps) => {
             <div>
               <span className="text-muted-foreground">Water Availability:</span>
               <div className="font-medium capitalize">{farmData.waterAvailability}</div>
+            </div>
+            <div>
+              <span className="text-muted-foreground">Season:</span>
+              <div className="font-medium capitalize">{farmData.season}</div>
             </div>
           </div>
         </Card>

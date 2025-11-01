@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Thermometer, CloudRain, DollarSign, Globe, Droplets } from "lucide-react";
+import { MapPin, Thermometer, CloudRain, DollarSign, Globe, Droplets, Calendar } from "lucide-react";
 import { toast } from "sonner";
 
 interface FormData {
@@ -18,6 +18,7 @@ interface FormData {
   notes: string;
   language: string;
   waterAvailability: string;
+  season: string;
 }
 
 interface RecommendationFormProps {
@@ -34,14 +35,15 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
     previousCrop: "",
     notes: "",
     language: "english",
-    waterAvailability: ""
+    waterAvailability: "",
+    season: ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.location || !formData.farmSize || !formData.soilType || !formData.climate || !formData.waterAvailability) {
+    if (!formData.location || !formData.farmSize || !formData.soilType || !formData.climate || !formData.waterAvailability || !formData.season) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -210,6 +212,25 @@ const RecommendationForm = ({ onSubmit }: RecommendationFormProps) => {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
+            {/* Season */}
+            <div className="space-y-2">
+              <Label className="text-base font-medium flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-primary" />
+                Planting Season *
+              </Label>
+              <Select onValueChange={(value) => handleInputChange("season", value)}>
+                <SelectTrigger className="h-12">
+                  <SelectValue placeholder="Select planting season" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="kharif">Kharif (Jun-Oct) - खरीफ (Monsoon Season)</SelectItem>
+                  <SelectItem value="rabi">Rabi (Nov-Apr) - रबी (Winter Season)</SelectItem>
+                  <SelectItem value="zaid">Zaid (Mar-Jun) - जायद (Summer Season)</SelectItem>
+                  <SelectItem value="year-round">Year Round - साल भर</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Water Availability */}
