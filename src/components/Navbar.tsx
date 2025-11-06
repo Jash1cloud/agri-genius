@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useLocation } from "react-router-dom";
 import { Tractor, Home, Plus, User, LogOut, Users, Search, Award, Scan, FileText } from "lucide-react";
+import Logo from "@/components/Logo";
 
 const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -24,7 +25,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 font-bold text-xl">
-            🌾 AgreeGenius
+            <Logo size={32} />
+            <span>AgreeGenius</span>
           </Link>
           
           {user && (
