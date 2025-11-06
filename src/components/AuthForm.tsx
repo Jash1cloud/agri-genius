@@ -115,7 +115,7 @@ const AuthForm = ({ onSuccess }: AuthFormProps) => {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">🌾 कृषि सहायक / Farm Helper</CardTitle>
+          <CardTitle className="text-2xl">🌾 AgreeGenius</CardTitle>
           <CardDescription>
             अपने खाते में प्रवेश करें या नया खाता बनाएं
           </CardDescription>
