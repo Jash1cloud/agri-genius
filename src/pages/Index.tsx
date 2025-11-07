@@ -8,6 +8,7 @@ import EquipmentQuickActions from "@/components/EquipmentQuickActions";
 import RecommendationForm from "@/components/RecommendationForm";
 import CropRecommendations from "@/components/CropRecommendations";
 import Navbar from "@/components/Navbar";
+import Logo from "@/components/Logo";
 import { Award, TrendingUp, Globe, Scan, Camera, AlertCircle, FileText, CheckCircle } from "lucide-react";
 
 const Index = () => {
@@ -34,12 +35,19 @@ const Index = () => {
       {user && <Navbar />}
       
       {!user && (
-        <div className="bg-muted/30 border-b p-4 text-center">
-          <p className="mb-4 text-sm text-muted-foreground">Please login to access equipment sharing features</p>
-          <Link to="/auth">
-            <Button variant="outline" size="sm">Login / Signup</Button>
-          </Link>
-        </div>
+        <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              <Link to="/" className="flex items-center gap-2 font-bold text-xl">
+                <Logo size={32} />
+                <span>AgreeGenius</span>
+              </Link>
+              <Link to="/auth">
+                <Button variant="outline" size="sm">Login / Signup</Button>
+              </Link>
+            </div>
+          </div>
+        </nav>
       )}
       
       <HeroSection />
