@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import Logo from "@/components/Logo";
 
 interface AuthFormProps {
   onSuccess: () => void;
@@ -115,7 +117,10 @@ const AuthForm = ({ onSuccess }: AuthFormProps) => {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">🌾 AgreeGenius</CardTitle>
+          <Link to="/" className="flex items-center justify-center gap-2 mb-2">
+            <Logo size={48} />
+          </Link>
+          <CardTitle className="text-2xl">AgreeGenius</CardTitle>
           <CardDescription>
             अपने खाते में प्रवेश करें या नया खाता बनाएं
           </CardDescription>
