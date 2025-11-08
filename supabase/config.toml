@@ -1,7 +1,7 @@
 project_id = "cvoywjimbwizlzhynntb"
 
 [functions.analyze-crop]
-verify_jwt = false
+verify_jwt = true
 
 [functions.analyze-schemes]
-verify_jwt = false
+verify_jwt = true
